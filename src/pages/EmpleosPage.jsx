@@ -1,6 +1,6 @@
 import React from 'react'
 import { useState, useEffect } from 'react'
-
+import EmpleosList from '../components/EmpleosList.jsx';
 const EmpleosPage = () => {
     const [empleos, setEmpleos]=useState([]);
 
@@ -32,14 +32,12 @@ const EmpleosPage = () => {
     /*dependencias: ninguna por ahora, solo se deberia ejecutar una vez */
     [] )
     /*test empleos en array */
-    //console.log(empleos)
+    console.log(empleos)
 
 
   return (
     <div><h2>Empleos Page</h2>
-    <pre>
-      {JSON.stringify(empleos, null, 6)}
-    </pre>
+    <EmpleosList />
     </div>
   )
 }
