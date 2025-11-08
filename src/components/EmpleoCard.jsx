@@ -1,8 +1,30 @@
 import React from 'react'
 
-const EmpleoCard = () => {
+const EmpleoCard = ({empleo}) => {
+    /* Revisar si esto mejor llevarlo a otro lado, desestructure todo*/
+    const {titulo, empresa, ubicacion, salario, descripcion,
+        modalidad, seniority, id}=empleo;
+    
+
   return (
-    <div>EmpleoCard</div>
+    <article>
+        <section>
+            <h3>{titulo}</h3>
+            <p><strong>{empresa}</strong></p>
+        </section>
+        <section>
+            <p>{descripcion}</p>
+        </section>
+        <section>
+            <ul>
+            <li>Ubicacion: {ubicacion}</li>
+            <li>Salario:{salario}</li>
+            <li>Modalidad: {modalidad}</li>
+            <li>Seniority:{seniority}</li>
+            </ul>
+        </section>
+        
+    </article>
   )
 }
 
