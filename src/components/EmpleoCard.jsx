@@ -3,7 +3,7 @@ import React from 'react'
 const EmpleoCard = (props) => {
     /* Revisar si esto mejor llevarlo a otro lado, desestructure todo*/
     const {titulo, empresa, ubicacion, salario, descripcion,
-        modalidad, seniority, id}=props.empleo;
+        modalidad, seniority}=props.dataEmpleo;
     
 
   return (
