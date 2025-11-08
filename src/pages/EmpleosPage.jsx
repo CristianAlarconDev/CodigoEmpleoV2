@@ -32,12 +32,12 @@ const EmpleosPage = () => {
     /*dependencias: ninguna por ahora, solo se deberia ejecutar una vez */
     [] )
     /*test empleos en array */
-    console.log(empleos)
+    //console.log(empleos)
 
 
   return (
     <div><h2>Empleos Page</h2>
-    <EmpleosList />
+    <EmpleosList listaEmpleos={empleos} />
     </div>
   )
 }

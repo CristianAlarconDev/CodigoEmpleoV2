@@ -1,9 +1,9 @@
 import React from 'react'
 
-const EmpleoCard = ({empleo}) => {
+const EmpleoCard = (props) => {
     /* Revisar si esto mejor llevarlo a otro lado, desestructure todo*/
     const {titulo, empresa, ubicacion, salario, descripcion,
-        modalidad, seniority, id}=empleo;
+        modalidad, seniority, id}=props.empleo;
     
 
   return (
