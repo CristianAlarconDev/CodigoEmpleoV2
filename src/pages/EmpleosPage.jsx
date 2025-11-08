@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react'
 import EmpleosList from '../components/EmpleosList.jsx';
 const EmpleosPage = () => {
     const [empleos, setEmpleos]=useState([]);
-
+    const [cargando, setCargando]=useState(true);
     const mockApi= "https://68ee91ccdf2025af78042146.mockapi.io/recursos/empleos" ;
     
     async function fetchMockApi(url){
@@ -28,16 +28,17 @@ const EmpleosPage = () => {
         setEmpleos(empleosData);
       }
       cargarEmpleos();
+      setCargando(false);
     },
     /*dependencias: ninguna por ahora, solo se deberia ejecutar una vez */
-    [] )
+    [] );
     /*test empleos en array */
     //console.log(empleos)
 
 
   return (
     <div><h2>Empleos Page</h2>
-    <EmpleosList listaEmpleos={empleos} />
+    {cargando? (<p>Buscando empleos</p>):(<EmpleosList listaEmpleos={empleos} />)}
     </div>
   )
 }
