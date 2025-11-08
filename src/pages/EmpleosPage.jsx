@@ -31,12 +31,16 @@ const EmpleosPage = () => {
     },
     /*dependencias: ninguna por ahora, solo se deberia ejecutar una vez */
     [] )
-    /*test empleos en nodelist */
-    console.log(empleos)
+    /*test empleos en array */
+    //console.log(empleos)
 
 
   return (
-    <div>EmpleosPage</div>
+    <div><h2>Empleos Page</h2>
+    <pre>
+      {JSON.stringify(empleos, null, 6)}
+    </pre>
+    </div>
   )
 }
 
