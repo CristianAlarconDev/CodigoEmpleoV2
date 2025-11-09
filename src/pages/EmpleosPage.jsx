@@ -1,6 +1,7 @@
 import React from 'react'
 import { useState, useEffect } from 'react'
 import EmpleosList from '../components/EmpleosList.jsx';
+import Filters from '../components/Filters.jsx';
 const EmpleosPage = () => {
     const [empleos, setEmpleos]=useState([]);
     const [cargando, setCargando]=useState(true);
@@ -38,6 +39,7 @@ const EmpleosPage = () => {
 
   return (
     <div><h2>Empleos Page</h2>
+    <Filters/>
     {cargando? (<p>Buscando empleos</p>):(<EmpleosList listaEmpleos={empleos} />)}
     </div>
   )
