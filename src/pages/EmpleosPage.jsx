@@ -5,6 +5,11 @@ import Filters from '../components/Filters.jsx';
 const EmpleosPage = () => {
     const [empleos, setEmpleos]=useState([]);
     const [cargando, setCargando]=useState(true);
+    /*state para los filtros */
+    const [filtros, setFiltros]=useState({
+      seniority:'todos',
+      modalidad:'todas'
+    });
     const mockApi= "https://68ee91ccdf2025af78042146.mockapi.io/recursos/empleos" ;
     
     async function fetchMockApi(url){

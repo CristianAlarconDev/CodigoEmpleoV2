@@ -15,6 +15,8 @@ const Filters = () => {
         </select>
         <fieldset>
             <legend>Modalidad</legend>
+            <input type="checkbox" value="todas" id="modalidad-todas" name='todas'/>
+            <label htmlFor="modalidad-todas">Todas</label>
             <input type="checkbox" value="remoto" id="modalidad-remoto" name='remoto'/>
             <label htmlFor="modalidad-remoto">Remoto</label>
             <input type="checkbox" value="hibrido"id="modalidad-hibrido" input='hibrido'/>
