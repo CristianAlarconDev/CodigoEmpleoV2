@@ -6,10 +6,24 @@ const EmpleosPage = () => {
     const [empleos, setEmpleos]=useState([]);
     const [cargando, setCargando]=useState(true);
     /*state para los filtros */
-    const [filtros, setFiltros]=useState({
-      seniority:'todos',
-      modalidad:'todas'
-    });
+    const [filtro, setFiltros]=useState('todos');
+
+    const handleFilterChange=(event)=>{
+      const target=event.target;
+      //const name = target.name;
+      const value=target.value;
+      console.log("se llego aca con value: " + value)
+      setFiltros(value)
+
+    }
+    const empleosFiltrados = empleos.filter((empleo)=>{
+      if(filtro==='todos'){
+        return true
+      }
+      console.log("se llego aca con valor de filtro :" + filtro)
+      return empleo.seniority.toLowerCase()===filtro.toLowerCase();
+    })
+    
     const mockApi= "https://68ee91ccdf2025af78042146.mockapi.io/recursos/empleos" ;
     
     async function fetchMockApi(url){
@@ -30,11 +44,20 @@ const EmpleosPage = () => {
 
     useEffect(()=>{
       const cargarEmpleos =async ()=>{
-        const empleosData =await fetchMockApi(mockApi);
-        setEmpleos(empleosData);
+        try {
+          const empleosData =await fetchMockApi(mockApi);
+          console.log("esto es el fetch :", empleosData)
+          setEmpleos(empleosData);
+        } catch (error) {
+          console.error("Error al cargar empleos:", error);
+        }
+        finally{
+          setCargando(false);
+        }
+        
       }
       cargarEmpleos();
-      setCargando(false);
+      
     },
     /*dependencias: ninguna por ahora, solo se deberia ejecutar una vez */
     [] );
@@ -44,8 +67,9 @@ const EmpleosPage = () => {
 
   return (
     <div><h2>Empleos Page</h2>
-    <Filters/>
-    {cargando? (<p>Buscando empleos</p>):(<EmpleosList listaEmpleos={empleos} />)}
+    <Filters seniorityActual={filtro} onSeniorityChange={handleFilterChange}/>
+    {cargando? (<p>Buscando empleos...</p>):(<EmpleosList listaEmpleos={empleosFiltrados} />
+    )}
     </div>
   )
 }
