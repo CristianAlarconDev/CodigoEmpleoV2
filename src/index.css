@@ -1,1 +1,47 @@
 @import "tailwindcss";
+
+:root {
+  /* === Colores === 
+  
+  /* 1. Paleta de Marca (Azules) */
+  --color-primary: #2563eb;       
+  --color-primary-dark: #1d4ed8; 
+  
+  /* 2. Colores de Fondo (Superficies) */
+  --color-bg: #eff6ff;            /* Fondo de la página (celeste muy claro) */
+  --color-surface: #ffffff;       /* Fondo de tarjetas, navbar (blanco) */
+
+  /* 3. Colores de Texto */
+  --text-primary: #111827;        /* Títulos principales (casi negro) */
+  --text-secondary: #475569;      /* Texto de cuerpo, subtítulos (gris oscuro) */
+  --text-tertiary: #6b7281;       /* Texto más claro (metadata, "Publicado:") */
+  --text-on-primary: #ffffff;     /* Texto sobre botones azules (blanco) */
+  
+  /* 4. Colores de Bordes y Separadores */
+  --color-border: #dbeafe;         /* Borde sutil (alrededor del buscador) */
+
+
+  /* === Tipografía ===*/
+  --font-family-sans: 'Inter', system-ui, -apple-system, sans-serif;
+  
+  /* Pesos de la fuente */
+  --font-weight-regular: 400;
+  --font-weight-medium: 500;
+  --font-weight-bold: 700;        /* Para títulos de tarjeta */
+  --font-weight-extrabold: 800;   /* Para títulos grandes de sección */
+
+  /* Tamaños de la fuente (Titulos) */
+  --font-size-h1: 2.25rem;  /* 36px (Ej: "Encuentra tu próximo trabajo") */
+  --font-size-h2: 1.875rem; /* 30px (Ej: "Ofertas destacadas") */
+  --font-size-h3: 1.25rem;  /* 20px (Ej: Título de la tarjeta) */
+  --font-size-body: 1rem;   /* 16px (Texto normal) */
+  --font-size-small: 0.875rem;/* 14px (Metadata de la tarjeta) */
+
+
+  /* === Otros Estilos (Radios y Sombras) === */
+  --border-radius-container: 1rem;  /* 16px (Borde del buscador) */
+  --border-radius-card: 0.75rem;    /* 12px (Borde de las tarjetas) */
+  --border-radius-btn: 0.5rem;      /* 8px (Borde de los botones) */
+
+  --shadow-card: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+}
