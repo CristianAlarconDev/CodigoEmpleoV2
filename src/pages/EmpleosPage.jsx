@@ -5,23 +5,43 @@ import Filters from '../components/Filters.jsx';
 const EmpleosPage = () => {
     const [empleos, setEmpleos]=useState([]);
     const [cargando, setCargando]=useState(true);
-    /*state para los filtros */
-    const [filtro, setFiltros]=useState('todos');
+    
+    const [filtros, setFiltros]=useState({
+    seniority: 'todos', remoto: false,hibrido: false,presencial: false});
 
     const handleFilterChange=(event)=>{
       const target=event.target;
-      //const name = target.name;
-      const value=target.value;
-      console.log("se llego aca con value: " + value)
-      setFiltros(value)
+      const name = target.name;
+      //const value=target.value;
+      const valor = target.type === 'checkbox' ? target.checked : target.value;
+      //console.log("se llego aca con value: " + value)
+      //setFiltros(value)
+      setFiltros(prevFiltros => ({
+        ...prevFiltros, 
+        [name]: valor    
+    }));
 
     }
     const empleosFiltrados = empleos.filter((empleo)=>{
-      if(filtro==='todos'){
+     /* if(filtro==='todos'){
         return true
       }
       console.log("se llego aca con valor de filtro :" + filtro)
-      return empleo.seniority.toLowerCase()===filtro.toLowerCase();
+      return empleo.seniority.toLowerCase()===filtro.toLowerCase();*/
+    
+    const pasaSeniority = (filtros.seniority === 'todos') || 
+                          (empleo.seniority.toLowerCase() === filtros.seniority.toLowerCase());
+    if (!pasaSeniority) return false;
+    const { remoto, hibrido, presencial } = filtros;
+    const ningunaTildada = !remoto && !hibrido && !presencial;
+    if (ningunaTildada) {
+        return true; 
+    }
+    const modalidadEmpleo = empleo.modalidad.toLowerCase().replace('í', 'i');
+    if (filtros.remoto && modalidadEmpleo === 'remoto') return true;
+    if (filtros.hibrido && modalidadEmpleo === 'hibrido') return true;
+    if (filtros.presencial && modalidadEmpleo === 'presencial') return true;
+    return false;
     })
     
     const mockApi= "https://68ee91ccdf2025af78042146.mockapi.io/recursos/empleos" ;
@@ -67,7 +87,7 @@ const EmpleosPage = () => {
 
   return (
     <div><h2>Empleos Page</h2>
-    <Filters seniorityActual={filtro} onSeniorityChange={handleFilterChange}/>
+    <Filters filtrosSeleccionados={filtros} onFiltroChange={handleFilterChange}/>
     {cargando? (<p>Buscando empleos...</p>):(<EmpleosList listaEmpleos={empleosFiltrados} />
     )}
     </div>
