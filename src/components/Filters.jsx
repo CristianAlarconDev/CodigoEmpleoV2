@@ -1,5 +1,5 @@
 import React from 'react'
-
+import styles from './Filters.module.css'
 const Filters = ({filtrosSeleccionados,onFiltroChange}) => {
     /*const handleDebugChange = (event) => {
     
@@ -26,24 +26,26 @@ const Filters = ({filtrosSeleccionados,onFiltroChange}) => {
 /*handleDebugChange */
   return (
     /*Contenedor general */
-    <section className='border'>
-        <h2>Filtros</h2>
-        <label htmlFor="seniority-select"> Seniority</label>
-        <select name="seniority" id="seniority-select" onChange={onFiltroChange} value={filtrosSeleccionados.seniority}>
+    <section className={styles.container}>
+        <h2 className={styles.title}>Filtros</h2>
+        <div className={styles.formGroup}>
+          <label htmlFor="seniority-select"> Seniority</label>
+          <select className={styles.select} name="seniority" id="seniority-select" onChange={onFiltroChange} value={filtrosSeleccionados.seniority}>
             <option value="todos">Todos los niveles</option>
             <option value="Trainee">Trainee</option>
             <option value="Junior">Junior</option>
             <option value="Semi Senior">Semi-Senior</option>
             <option value="Senior">Senior</option>
-        </select>
-        <fieldset>
-            <legend>Modalidad</legend>
-  
-            <input type="checkbox" value="remoto" id="modalidad-remoto" name='remoto' onChange={onFiltroChange} checked={filtrosSeleccionados.remoto}/>
+          </select>
+        </div>
+        
+        <fieldset className={styles.fieldsetGroup}>
+            <legend className={styles.legend}>Modalidad</legend>
+            <input className={styles.checkbox} type="checkbox" value="remoto" id="modalidad-remoto" name='remoto' onChange={onFiltroChange} checked={filtrosSeleccionados.remoto}/>
             <label htmlFor="modalidad-remoto">Remoto</label>
-            <input type="checkbox" value="hibrido"id="modalidad-hibrido" name='hibrido' onChange={onFiltroChange}checked={filtrosSeleccionados.hibrido}/>
+            <input className={styles.checkbox} type="checkbox" value="hibrido"id="modalidad-hibrido" name='hibrido' onChange={onFiltroChange}checked={filtrosSeleccionados.hibrido}/>
             <label htmlFor="modalidad-hibrido">Hibrido</label>
-            <input type="checkbox" value="presencial"id="modalidad-presencial" name='presencial' onChange={onFiltroChange}checked={filtrosSeleccionados.presencial}/>
+            <input className={styles.checkbox} type="checkbox" value="presencial"id="modalidad-presencial" name='presencial' onChange={onFiltroChange}checked={filtrosSeleccionados.presencial}/>
             <label htmlFor="modalidad-presencial" >Presencial</label>
         </fieldset>
     </section>
