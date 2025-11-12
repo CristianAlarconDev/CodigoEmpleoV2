@@ -86,10 +86,21 @@ const EmpleosPage = () => {
 
 
   return (
-    <div><h2>Empleos Page</h2>
-    <Filters filtrosSeleccionados={filtros} onFiltroChange={handleFilterChange}/>
-    {cargando? (<p>Buscando empleos...</p>):(<EmpleosList listaEmpleos={empleosFiltrados} />
-    )}
+    <div className="max-w-7xl mx-auto p-4 sm:p-6 lg:p-8">
+      <h2 className="text-3xl font-bold text-gray-900 mb-8">
+        Empleos 
+      </h2>
+      {/*Cont principal para disposicion desktop o mobile, cambiar o llevar a css propio */}
+      <div className="grid grid-cols-1 lg:grid-cols-4 gap-8 ">
+        <div className="lg:col-span-1">
+        <Filters filtrosSeleccionados={filtros} onFiltroChange={handleFilterChange}/>
+      </div>
+      <div className="lg:col-span-3">
+        {cargando? (<p>Buscando empleos...</p>):(<EmpleosList listaEmpleos={empleosFiltrados} />
+        )}
+      </div>
+      </div>
+      
     </div>
   )
 }
