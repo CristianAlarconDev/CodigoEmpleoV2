@@ -12,7 +12,7 @@ const EmpleosList = (props) => {
 
     return (
     <div><h2>Empleo List</h2>
-    <section>
+    <section className="grid grid-cols-1 md:grid-cols-2 gap-6">
         {empleos.map(unEmpleo => (
                 <EmpleoCard key={unEmpleo.id} dataEmpleo={unEmpleo} />
         ))}
