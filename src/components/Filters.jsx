@@ -31,7 +31,7 @@ const Filters = ({filtrosSeleccionados,onFiltroChange}) => {
         <div className={styles.formGroup}>
           <label htmlFor="seniority-select" className={styles.legend}> Seniority</label>
           <select className={styles.select} name="seniority" id="seniority-select" onChange={onFiltroChange} value={filtrosSeleccionados.seniority}>
-            <option value="todos">Todos los niveles</option>
+            <option value="todos">Todos</option>
             <option value="Trainee">Trainee</option>
             <option value="Junior">Junior</option>
             <option value="Semi Senior">Semi-Senior</option>
