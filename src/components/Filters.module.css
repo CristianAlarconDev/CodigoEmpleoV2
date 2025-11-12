@@ -1,0 +1,76 @@
+
+/* 1. Contenedor (La "card" base) */
+.container {
+  background-color: var(--color-surface);
+  border-radius: var(--border-radius-card);
+  box-shadow: var(--shadow-card);
+  padding: 1.5rem; 
+}
+
+/* 2. Título "Filtros" */
+.title {
+  font-family: var(--font-family-sans);
+  font-weight: var(--font-weight-bold);
+  font-size: var(--font-size-h3);
+  color: var(--text-primary);
+  margin: 0 0 1.5rem 0; /* Solo margen abajo */
+}
+
+/* 3. Espaciado entre grupos de filtros */
+.formGroup {
+  margin-bottom: 1.5rem;
+}
+
+/* 4. Labels y Legends */
+.label,
+.legend {
+  font-family: var(--font-family-sans);
+  font-weight: var(--font-weight-medium);
+  font-size: var(--font-size-small); 
+  color: var(--text-secondary);
+  display: block;
+  margin-bottom: 0.5rem; /* Espacio entre label y control */
+}
+
+/* 5. Select (Estilo nativo del navegador) */
+.select {
+  width: 100%;
+  padding: 0.75rem; /* Padding simple */
+  font-family: var(--font-family-sans);
+  font-size: var(--font-size-body);
+  color: var(--text-primary);
+  border: 1px solid var(--color-border);
+  border-radius: var(--border-radius-btn);
+  /* Quitamos 'appearance' y 'background-image' para usar la flecha nativa */
+}
+
+/* 6. Fieldset (Solo para semántica, sin bordes) */
+.fieldsetGroup {
+  border: none;
+  padding: 0;
+  margin: 0;
+}
+
+.legend {
+  margin-bottom: 0.75rem; /* Espacio entre "Modalidad" y el 1er check */
+}
+
+/* 7. Checkboxes (Alineación mínima) */
+.checkboxWrapper {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem; /* Espacio entre el box y el label */
+  margin-bottom: 0.75rem; /* Espacio entre cada línea de checkbox */
+}
+
+/* Estilo mínimo para que el label sea legible */
+.checkboxWrapper label {
+  font-family: var(--font-family-sans);
+  color: var(--text-primary);
+  cursor: pointer;
+}
+
+.checkbox {
+  cursor: pointer;
+  /* Quitamos 'accent-color' para usar el color nativo del navegador */
+}
