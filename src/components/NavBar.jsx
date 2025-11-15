@@ -35,6 +35,11 @@ const NavBar = () => {
               Recursos
             </NavLink>
           </li>
+          <li>
+            <NavLink to="/login" className={getStyle}>
+              Login
+            </NavLink>
+          </li>
         </ul>
       </div>
     </nav>
