@@ -7,13 +7,10 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 
 const App = () => {
   return (
-   
     <BrowserRouter>
       <NavBar />
       <main className="container mx-auto mt-7">
-       
         <Rutas />
-        
       </main>
       <Footer/>
     </BrowserRouter>
