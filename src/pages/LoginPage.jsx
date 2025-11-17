@@ -1,22 +1,29 @@
 import React from 'react'
 import { signInWithPopup } from "firebase/auth";
 import { autenticacion, googleProvider } from '../config/firebase';
+import { useAutenticacionContext } from '../context/AutenticacionContext';
 
 const LoginPage = () => {
+    const { login } = useAutenticacionContext();
+
     const handleGoogleLogin = async () => {
     try {
         const result = await signInWithPopup(autenticacion, googleProvider);
-        
+        /*
         console.log("Usuario logueado!");
-        
         console.log("Nombre:", result.user.displayName);
         console.log("Email:", result.user.email);
         console.log("Foto URL:", result.user.photoURL);
         console.log("UID:", result.user.uid); 
-
+        */
+        const datosUsuario = {
+            nombre: result.user.displayName,
+            email: result.user.email,
+            fotoURL: result.user.photoURL
+        };
         // Aca deberia redirigir o hacer algo tras el login,
         // como guardalo en un contexto
-
+        login(datosUsuario);
         } catch (error) {
         // manejar errores aca:
         console.error("Error durante el inicio de sesión:", error.message);
