@@ -3,6 +3,7 @@ import { signInWithPopup } from "firebase/auth";
 import { autenticacion, googleProvider } from '../config/firebase';
 import { useAutenticacionContext } from '../context/AutenticacionContext';
 
+
 const LoginPage = () => {
     const { login } = useAutenticacionContext();
 
@@ -31,7 +32,6 @@ const LoginPage = () => {
     };
 
     return (
-
         <section className="flex flex-col items-center justify-center min-h-screen bg-gray-100">
             <section className="bg-white p-8 rounded-lg shadow-md text-center">
             
@@ -64,6 +64,7 @@ const LoginPage = () => {
 
             </section>
         </section>
+
     )
 }
 
