@@ -41,9 +41,13 @@ export const AutenticacionProvider = ({ children }) => {
     }, []);
 
     const logout = () => signOut(autenticacion);
-
+    const data = {
+        usuario,
+        logout
+    }
     return (
-        <AutenticacionContext.Provider value={{usuario, logout}}>
+        
+        <AutenticacionContext.Provider value={data}>
             {children}
         </AutenticacionContext.Provider>
     );
