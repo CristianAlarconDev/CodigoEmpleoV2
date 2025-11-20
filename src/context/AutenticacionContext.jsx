@@ -22,13 +22,13 @@ export const AutenticacionProvider = ({ children }) => {
     
     useEffect(() => {
         /*abro el 'listener' */
-        const unsubscribe = onAuthStateChanged(autenticacion, (userFirebase) => {
-            if (userFirebase) {
+        const unsubscribe = onAuthStateChanged(autenticacion, (usuarioEnFirebase) => {
+            if (usuarioEnFirebase) {
                 const datosUsuario = {
-                    nombre: userFirebase.displayName,
-                    email: userFirebase.email,
-                    fotoURL: userFirebase.photoURL,
-                    uid: userFirebase.uid
+                    nombre: usuarioEnFirebase.displayName,
+                    email: usuarioEnFirebase.email,
+                    fotoURL: usuarioEnFirebase.photoURL,
+                    uid: usuarioEnFirebase.uid
                 };
                 setUsuario(datosUsuario);
             } else {
