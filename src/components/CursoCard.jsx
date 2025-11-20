@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 
 
 const CursoCard = ({ unCurso }) => {
@@ -37,6 +38,7 @@ const CursoCard = ({ unCurso }) => {
         </p>
         
         {/* Botón - Replicando .custom-btn hover (azul de Bootstrap) */}
+        <Link to={'/cursos/'+ unCurso.id}>
         <button 
           className="w-full bg-blue-600 text-white font-semibold py-1.5 px-4 rounded-lg 
                      transition duration-300 ease-in-out 
@@ -45,6 +47,7 @@ const CursoCard = ({ unCurso }) => {
         >
           Ver más
         </button>
+        </Link>
       </div>
     </div>
   );
