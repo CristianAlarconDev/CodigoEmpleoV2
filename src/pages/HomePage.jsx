@@ -3,8 +3,8 @@ import { useFetch } from '../hooks/useFetch.js';
 import EmpleosList from '../components/EmpleosList.jsx';
 
 const HomePage = () => {
-  const {data, cargando}=useFetch(import.meta.env.VITE_MOCKAPI_ENDPOINT_EMPLEOS);
-  const empleosRecientes = data.slice(0, 4);
+  const {data:empleos, cargando:cargandoEmpleos}=useFetch(import.meta.env.VITE_MOCKAPI_ENDPOINT_EMPLEOS);
+  const empleosRecientes = empleos.slice(0, 4);
   
 
   return (
@@ -21,7 +21,7 @@ const HomePage = () => {
         <section>
           <h2>Ultimos empleos</h2>
           {
-            cargando ? (
+            cargandoEmpleos ? (
               <p>Cargando empleos...</p>
             ) : (<EmpleosList listaEmpleos={empleosRecientes} />)     
           }
