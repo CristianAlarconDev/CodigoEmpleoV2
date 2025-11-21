@@ -60,7 +60,7 @@ export function CursosProvider({children}){
   
 
   return(
-    <CursosContext.Provider value ={{obtenerCursos,obtenerUnCurso}}>
+    <CursosContext.Provider value ={{obtenerCursos,obtenerUnCurso, cursos}}>
         {children}
     </CursosContext.Provider>
   )
