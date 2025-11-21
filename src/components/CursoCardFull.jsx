@@ -5,23 +5,34 @@ import { Award, BookOpen, Clock, User } from "lucide-react";
 
 function CursoCardFull(){
 
-    const { id } = useParams();
-    const {obtenerUnCurso,cursoUnico} = useCursosContext();
-    const[curso,setCurso] = useState([])
-    const[cargando,setCargando]= useState(true)
-    
+  const { id } = useParams();
+  const { obtenerUnCurso } = useCursosContext(); 
+  const [curso, setCurso] = useState(null); 
+  const [cargando, setCargando] = useState(true);
 
-    useEffect(()=>{
-        obtenerUnCurso(id).then( () => {
-            setCurso(cursoUnico)
-            setCargando(false)
-        })
-    },[id])
-    
-    
-    if(cargando){
-        return(<p>Cargando</p>)
-    }
+  useEffect(() => {
+    setCargando(true);
+    setCurso(null); // Limpiamos para evitar ver el anterior
+
+    const fetchDetail = async () => {
+      // Ahora obtenerUnCurso busca en el array y nos da el objeto
+      const resultado = await obtenerUnCurso(id);
+      
+      if (resultado) {
+        setCurso(resultado);
+      } else {
+        console.error("Curso no encontrado con ID:", id);
+      }
+      setCargando(false);
+    };
+
+    fetchDetail();
+  }, [id]);
+
+  if (cargando) return <div className="p-10 text-center">Cargando...</div>;
+  
+  if (!curso) return <div className="p-10 text-center">No se encontró el curso.</div>;
+
     return(
     // Contenedor de la tarjeta: Fondo blanco, sombra, bordes redondeados
     <div className="bg-white rounded-xl shadow-lg overflow-hidden flex flex-col md:flex-row w-full h-full">
