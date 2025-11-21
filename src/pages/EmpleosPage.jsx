@@ -9,7 +9,7 @@ const EmpleosPage = () => {
     seniority: 'todos', remoto: false,hibrido: false,presencial: false});
     /*Se llevo la logica de fetch a un hook useEmpleos; aca se intenta tener los empleos como json junto al
     estado cargando */
-    const {empleos, cargando}=useFetch(import.meta.env.VITE_MOCKAPI_ENDPOINT_EMPLEOS);
+    const {data:empleos, cargando}=useFetch(import.meta.env.VITE_MOCKAPI_ENDPOINT_EMPLEOS);
     
     const handleFilterChange=(event)=>{
       const target=event.target;
