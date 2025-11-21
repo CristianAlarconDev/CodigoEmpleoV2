@@ -2,14 +2,14 @@ import React from 'react'
 import { useState } from 'react'
 import EmpleosList from '../components/EmpleosList.jsx';
 import Filters from '../components/Filters.jsx';
-import { useEmpleos } from '../hooks/useEmpleos.js';
+import { useFetch } from '../hooks/useFetch.js';
 const EmpleosPage = () => {
   
     const [filtros, setFiltros]=useState({
     seniority: 'todos', remoto: false,hibrido: false,presencial: false});
     /*Se llevo la logica de fetch a un hook useEmpleos; aca se intenta tener los empleos como json junto al
     estado cargando */
-    const {empleos, cargando}=useEmpleos();
+    const {empleos, cargando}=useFetch(import.meta.env.VITE_MOCKAPI_ENDPOINT_EMPLEOS);
     
     const handleFilterChange=(event)=>{
       const target=event.target;
