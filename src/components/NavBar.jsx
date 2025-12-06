@@ -1,10 +1,13 @@
 import React, { useState } from 'react'
 import { NavLink } from 'react-router-dom';
 import { useAutenticacionContext } from '../context/AutenticacionContext';
-import { LogOut, Menu, User } from 'lucide-react';
+import { LogOut, Menu, User, X } from 'lucide-react';
+import CRUDCurso from './CRUDCurso';
 const NavBar = () => {
-  const { usuario, logout } = useAutenticacionContext();
+  const { usuario, logout, esAdmin} = useAutenticacionContext();
   const [isOpen, setIsOpen] = useState(false);
+
+
 
   // Función para cerrar el menú móvil al hacer click en un enlace
   const closeMenu = () => setIsOpen(false);
@@ -38,6 +41,7 @@ const NavBar = () => {
               <NavLink to="/cursos" className={getNavLinkClass}>Cursos</NavLink>
               <NavLink to="/empleos" className={getNavLinkClass}>Empleos</NavLink>
               <NavLink to="/recursos" className={getNavLinkClass}>Recursos</NavLink>
+              {esAdmin(usuario) ? (<NavLink to="/crud" className={getNavLinkClass}>CRUD</NavLink>) :(<></>)}
 
               {/* SECCIÓN USUARIO DESKTOP */}
               {usuario ? (
@@ -84,6 +88,7 @@ const NavBar = () => {
           <NavLink to="/cursos" onClick={closeMenu} className={getNavLinkClass}>Cursos</NavLink>
           <NavLink to="/empleos" onClick={closeMenu} className={getNavLinkClass}>Empleos</NavLink>
           <NavLink to="/recursos" onClick={closeMenu} className={getNavLinkClass}>Recursos</NavLink>
+          {esAdmin(usuario) ? (<p>True</p>) :(<p>false</p>)}
           
           <div className="border-t border-gray-700 mt-4 pt-4 pb-2">
              {usuario ? (

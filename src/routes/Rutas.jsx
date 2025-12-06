@@ -6,6 +6,7 @@ import RecursosPage from '../pages/RecursosPage';
 import React from 'react'
 import LoginPage from '../pages/LoginPage';
 import CursoCardFull from '../components/CursoCardFull';
+import CRUDCurso from '../components/CRUDCurso';
 
 const Rutas = () => {
   return (
@@ -23,6 +24,8 @@ const Rutas = () => {
       <Route path="/login" element={<LoginPage />} />
 
       <Route path='/cursos/:id' element={<CursoCardFull/>}/>
+
+      <Route path='/crud' element={<CRUDCurso/>}/>
      
       {/* <Route path="*" element={<NotFoundPage />} /> */}
 

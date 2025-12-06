@@ -4,7 +4,6 @@ import { createContext, useContext, useEffect, useState } from "react";
 const CursosContext = createContext();
 export function CursosProvider({children}){
   const [cursos, setCursos]=useState([]);
-  const [cursoUnico,setCursoUnico] = useState([])
 
 
   const mockApiCursos= "https://68ee91ccdf2025af78042146.mockapi.io/recursos/cursos" ;
@@ -21,29 +20,47 @@ export function CursosProvider({children}){
       
     } catch (error) {
       console.error(error);
+      return null
     }
     return data;
   }
 
-    async function obtenerCursos() {
-        const data = await fetchMockApi(mockApiCursos);
-        setCursos(data)
-        return(data)
+    // Esta función se usa en el Home
+  async function obtenerCursos() {
+    // Si ya tengo datos, NO hago fetch de nuevo (opcional, pero recomendado)
+    if (cursos.length > 0) {
+        return cursos;
+    }
+    
+    // Si está vacío, voy a buscar
+    const data = await fetchMockApi(mockApiCursos);
+    setCursos(data);
+    return data;
+  }
+
+  // Esta función es la "Inteligente" para el Detalle
+  async function obtenerUnCurso(idBuscado) {
+    let catalogoCursos = cursos;
+
+    // 1. Verificación de Seguridad:
+    // Si el array está vacío (porque recargué la página en el detalle),
+    // tengo que ir a buscar los datos a la API sí o sí.
+    if (catalogoCursos.length === 0) {
+        catalogoCursos = await fetchMockApi(mockApiCursos);
+        // Aprovecho y guardo en el estado para el futuro
+        setCursos(catalogoCursos);
     }
 
-
-    async function obtenerUnCurso(id){
-        const cursos = await obtenerCursos()
-        const curso = cursos.find((c) => c.id === parseInt(id));
-        setCursoUnico(curso)
-    }
-
+    // 2. Ahora que seguro tengo datos (ya sean de memoria o recién traídos), busco:
+    const cursoEncontrado = catalogoCursos.find(c => c.id == idBuscado);
+    return cursoEncontrado;
+  }
 
 
   
 
   return(
-    <CursosContext.Provider value ={{obtenerCursos,cursos,obtenerUnCurso,cursoUnico}}>
+    <CursosContext.Provider value ={{obtenerCursos,obtenerUnCurso, cursos}}>
         {children}
     </CursosContext.Provider>
   )
