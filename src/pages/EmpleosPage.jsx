@@ -24,7 +24,7 @@ const EmpleosPage = () => {
     }));
 
     }
-    const empleosFiltrados = empleos.filter((empleo)=>{
+    const empleosFiltrados = (empleos || []).filter((empleo)=>{
 
     const pasaSeniority = (filtros.seniority === 'todos') || 
                           (empleo.seniority.toLowerCase() === filtros.seniority.toLowerCase());
