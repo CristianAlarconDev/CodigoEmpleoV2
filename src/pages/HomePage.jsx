@@ -5,9 +5,9 @@ import EmpleoCard from '../components/EmpleoCard.jsx';
 
 const HomePage = () => {
   const {data:empleos, cargando:cargandoEmpleos}=useFetch(import.meta.env.VITE_MOCKAPI_ENDPOINT_EMPLEOS);
-  const empleosRecientes = empleos.slice(0, 4);
+  const empleosRecientes = empleos?.slice(0, 4) || [];
   const {data:cursos, cargando:cargandoCursos}=useFetch(import.meta.env.VITE_MOCKAPI_ENDPOINT_CURSOS);
-  const cursosRecientes = cursos.slice(0, 4);
+  const cursosRecientes = cursos?.slice(0, 4) || [];
 
 
   return (
