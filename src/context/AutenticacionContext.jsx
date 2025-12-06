@@ -1,11 +1,12 @@
-import { createContext, useState, useContext } from 'react';
-
+import { createContext, useState,useEffect, useContext } from 'react';
+import { onAuthStateChanged, signOut } from 'firebase/auth';
+import { autenticacion } from '../config/firebase';
 // 1. Usamos el nombre del archivo, quitando 'Context' si lo tiene al final.
 const AutenticacionContext = createContext();
 
 export const AutenticacionProvider = ({ children }) => {
     const [usuario, setUsuario] = useState(null);
-
+    /*
     const login = (datosUsuario) => {
         setUsuario(datosUsuario);
     }
@@ -17,15 +18,42 @@ export const AutenticacionProvider = ({ children }) => {
         login,
         logout
     };
+*/
+    
+    useEffect(() => {
+        /*abro el 'listener' */
+        const unsubscribe = onAuthStateChanged(autenticacion, (usuarioEnFirebase) => {
+            if (usuarioEnFirebase) {
+                const datosUsuario = {
+                    nombre: usuarioEnFirebase.displayName,
+                    email: usuarioEnFirebase.email,
+                    fotoURL: usuarioEnFirebase.photoURL,
+                    uid: usuarioEnFirebase.uid
+                };
+                setUsuario(datosUsuario);
+            } else {
+                setUsuario(null);
+            }
+        });
+        /*cerrar el 'listener', recomendado por si se desomanta seguido el componente;
+        mismo funcioamiento */
+        return () => unsubscribe();
+    }, []);
 
+    const logout = () => signOut(autenticacion);
+    const data = {
+        usuario,
+        logout
+    }
     return (
+        
         <AutenticacionContext.Provider value={data}>
             {children}
         </AutenticacionContext.Provider>
     );
 }
 
-// 2. Creamos el hook para consumir el contexto
+
 // eslint-disable-next-line react-refresh/only-export-components
 export const useAutenticacionContext = () => {
     const context = useContext(AutenticacionContext);
