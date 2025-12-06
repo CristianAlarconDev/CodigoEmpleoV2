@@ -7,6 +7,7 @@ import React from 'react'
 import LoginPage from '../pages/LoginPage';
 import CursoCardFull from '../components/CursoCardFull';
 import CRUDCurso from '../components/CRUDCurso';
+import EmpleoCardFull from '../components/EmpleoCardFull.jsx';
 
 const Rutas = () => {
   return (
@@ -24,6 +25,8 @@ const Rutas = () => {
       <Route path="/login" element={<LoginPage />} />
 
       <Route path='/cursos/:id' element={<CursoCardFull/>}/>
+
+      <Route path='/empleo/:id' element={< EmpleoCardFull/>}/>
 
       <Route path='/crud' element={<CRUDCurso/>}/>
      
