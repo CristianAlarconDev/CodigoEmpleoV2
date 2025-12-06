@@ -6,6 +6,7 @@ const AutenticacionContext = createContext();
 
 export const AutenticacionProvider = ({ children }) => {
     const [usuario, setUsuario] = useState(null);
+    const administradores = import.meta.env.VITE_ADMINISTRADORES || "";
     /*
     const login = (datosUsuario) => {
         setUsuario(datosUsuario);
@@ -19,6 +20,11 @@ export const AutenticacionProvider = ({ children }) => {
         logout
     };
 */
+
+    function esAdmin(user){
+        if (!user || !user.email) return false;
+        return(administradores.includes(user.email))
+    }
     
     useEffect(() => {
         /*abro el 'listener' */
@@ -43,7 +49,8 @@ export const AutenticacionProvider = ({ children }) => {
     const logout = () => signOut(autenticacion);
     const data = {
         usuario,
-        logout
+        logout,
+        esAdmin
     }
     return (
         
