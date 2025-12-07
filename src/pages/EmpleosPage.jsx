@@ -3,7 +3,7 @@ import EmpleosList from '../components/EmpleosList.jsx';
 import Filters from '../components/Filters.jsx';
 import Paginador from '../components/Paginador';
 import { useFetch } from '../hooks/useFetch.js';
-import { useEmpleosFilters } from '../hooks/useEmpleosFilters.jsx';
+import { useEmpleosFilters } from '../hooks/useEmpleosFilters.js';
 import { usePaginacion } from '../hooks/usePaginacion.js';
 const EmpleosPage = () => {
   
