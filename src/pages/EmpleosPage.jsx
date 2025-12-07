@@ -20,7 +20,8 @@ const EmpleosPage = () => {
       </h2>
       <div className="bg-white p-4 rounded-lg shadow-sm border border-gray-100 mb-8">
         <h3 className="text-xl font-bold text-gray-900 mb-6">Búsqueda</h3>
-        <SearchBar valorBusqueda={filtros.busqueda} onSearchChange={handleFilterChange} />
+        <SearchBar valorBusqueda={filtros.busqueda} onSearchChange={handleFilterChange} 
+        placeholderString={"Buscar por puesto o empresa..."} />
       </div>
 
       {/*Cont principal para disposicion desktop o mobile, cambiar o llevar a css propio */}
