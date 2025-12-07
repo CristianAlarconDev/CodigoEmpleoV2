@@ -1,6 +1,6 @@
 import { useSearchParams} from 'react-router-dom'
 import {useEffect} from 'react'
-export const usePaginacion = (datos = [], itemsPorPagina = 10, dependenciaReset) => {
+export const usePaginacion = (datos = [], itemsPorPagina = 10, dependenciaReset=[]) => {
     //se setea la pagina inicial como la primera
     const [searchParams, setSearchParams] = useSearchParams();
     const paginaUrl = searchParams.get('pagina');

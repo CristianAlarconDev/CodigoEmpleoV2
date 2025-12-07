@@ -1,4 +1,3 @@
-import { useEffect } from 'react';
 import EmpleosList from '../components/EmpleosList.jsx';
 import Filters from '../components/Filters.jsx';
 import Paginador from '../components/Paginador';
@@ -29,7 +28,6 @@ const EmpleosPage = () => {
         <Paginador paginaActual={paginaActual} totalPaginas={totalPaginas} onChangePagina={irALaPagina}/>
       </div>
       </div>
-      
     </div>
   )
 }
