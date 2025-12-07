@@ -1,7 +1,7 @@
 import React from 'react';
 import { Search } from 'lucide-react'; 
 
-const SearchBar = ({ valorBusqueda, onSearchChange }) => {
+const SearchBar = ({ valorBusqueda, onSearchChange, placeholderString }) => {
     return (
         <div className="relative w-full mb-6">
             {/* Icono Lupa */}
@@ -9,7 +9,7 @@ const SearchBar = ({ valorBusqueda, onSearchChange }) => {
                 <Search className="h-5 w-5 text-gray-400" />
             </div>
             <input type="text" name="busqueda" value={valorBusqueda} onChange={onSearchChange}
-                placeholder="Buscar por puesto o empresa..."
+                placeholder={placeholderString}
                 className="block w-full pl-10 pr-3 py-3 border
                         border-gray-300 rounded-lg bg-white focus:outline-none 
                         focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all 
