@@ -5,7 +5,8 @@ export const useEmpleosFilters = (empleos) => {
     // Estado inicial de los filtros 
     const [filtros, setFiltros] = useState({
         seniority: 'todos',
-        modalidad: 'todos'
+        modalidad: 'todos',
+        busqueda:''
     });
 
     const handleFilterChange = (event) => {
@@ -19,30 +20,32 @@ export const useEmpleosFilters = (empleos) => {
     // parsea el texto a validar
     const normalizarTexto = (texto) => {
         if (!texto) return "";
-        return texto
-            .toString()                 
-            .toLowerCase()              
-            .normalize("NFD")           // Descompone letras con tilde 
+        return texto.toString().toLowerCase().normalize("NFD")// Descompone letras con tilde 
             // 'https://developer.mozilla.org/es/docs/Web/JavaScript/Reference/Global_Objects/String/normalize'
             .replace(/[\u0300-\u036f]/g, "") // Borra los símbolos de tilde
             .trim();                   
     };
 
-const listaSegura = empleos || [];
+    const listaSegura = empleos || [];
 
     const empleosFiltrados = listaSegura.filter(empleo => {
         
-        // empleo debe cumplir every condition
         return Object.entries(filtros).every(([key, valorFiltro]) => {
             
-            // si el filtro es todos etc etc
-            if (valorFiltro === 'todos') return true;
+            if (valorFiltro === 'todos' || valorFiltro === '') return true;
 
+            if (key === 'busqueda') {
+                const palabraBuscada = normalizarTexto(valorFiltro);
+                const tituloBusqueda = normalizarTexto(empleo.titulo);
+                const nombreEmpresa = normalizarTexto(empleo.empresa);
+                return tituloBusqueda.includes(palabraBuscada) || nombreEmpresa.includes(palabraBuscada);
+            }
+
+            // Para los select igual que antes
             const valorEmpleo = empleo[key];
-            const valorEmpleoParseado = normalizarTexto(valorEmpleo);
-            const filtroParseado = normalizarTexto(valorFiltro);
+            if (!valorEmpleo) return false;
             
-            return valorEmpleoParseado === filtroParseado;
+            return normalizarTexto(valorEmpleo) === normalizarTexto(valorFiltro);
         });
     });
 
