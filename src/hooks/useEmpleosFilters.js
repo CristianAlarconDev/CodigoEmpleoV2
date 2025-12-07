@@ -1,4 +1,4 @@
-import { useState, useMemo } from 'react';
+import { useState } from 'react';
 
 export const useEmpleosFilters = (empleos) => {
     
@@ -28,24 +28,23 @@ export const useEmpleosFilters = (empleos) => {
             .trim();                   
     };
 
-    const empleosFiltrados = useMemo(() => {
-        // si no hay empleos aun return
-        if (!empleos) return [];
+const listaSegura = empleos || [];
 
-        return empleos.filter(empleo => {
-            // El empleo debe pasar TODAS las validaciones de los filtros leidos de los select
-            return Object.entries(filtros).every(([key, valorFiltro]) => {
-                                
-                if (valorFiltro === 'todos') return true;
+    const empleosFiltrados = listaSegura.filter(empleo => {
+        
+        // empleo debe cumplir every condition
+        return Object.entries(filtros).every(([key, valorFiltro]) => {
+            
+            // si el filtro es todos etc etc
+            if (valorFiltro === 'todos') return true;
 
-                const valorEmpleo = empleo[key];
-                const valorEmpleoParseado = normalizarTexto(valorEmpleo);
-                const filtroParseado = normalizarTexto(valorFiltro);
-                
-                return valorEmpleoParseado === filtroParseado;
-            });
+            const valorEmpleo = empleo[key];
+            const valorEmpleoParseado = normalizarTexto(valorEmpleo);
+            const filtroParseado = normalizarTexto(valorFiltro);
+            
+            return valorEmpleoParseado === filtroParseado;
         });
-    }, [empleos, filtros]);
+    });
 
     return { filtros, handleFilterChange, empleosFiltrados };
 };
