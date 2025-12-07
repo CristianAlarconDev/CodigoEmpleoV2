@@ -1,8 +1,9 @@
 import React, { useState } from 'react'
-import { NavLink } from 'react-router-dom';
+import { NavLink, Link } from 'react-router-dom';
 import { useAutenticacionContext } from '../context/AutenticacionContext';
 import { LogOut, Menu, User, X } from 'lucide-react';
-import CRUDCurso from './CRUDCurso';
+import Logo from './Logo';
+
 const NavBar = () => {
   const { usuario, logout, esAdmin} = useAutenticacionContext();
   const [isOpen, setIsOpen] = useState(false);
@@ -28,16 +29,13 @@ const NavBar = () => {
         <div className="flex items-center justify-between h-16">
           
           {/* LOGO */}
-          <div className="flex-shrink-0 flex items-center cursor-pointer hover:opacity-80 transition-opacity">
-            <h1 className="text-2xl font-bold bg-gradient-to-r from-indigo-400 to-cyan-400 bg-clip-text text-transparent">
-              MiMarca
-            </h1>
-          </div>
+          <Link to="/" className="hover:opacity-90 transition-opacity">
+            <Logo />
+          </Link>
 
           {/* MENÚ DESKTOP (Oculto en móvil) */}
           <div className="hidden md:block">
             <div className="ml-10 flex items-baseline space-x-4">
-              <NavLink to="/" className={getNavLinkClass} end>Home</NavLink>
               <NavLink to="/cursos" className={getNavLinkClass}>Cursos</NavLink>
               <NavLink to="/empleos" className={getNavLinkClass}>Empleos</NavLink>
               <NavLink to="/recursos" className={getNavLinkClass}>Recursos</NavLink>

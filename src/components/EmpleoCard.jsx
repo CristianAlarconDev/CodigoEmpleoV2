@@ -1,5 +1,6 @@
 import React from 'react'
 import styles from './EmpleoCard.module.css'
+import { Link } from 'react-router-dom';
 const EmpleoCard = (props) => {
     /* Revisar si esto mejor llevarlo a otro lado, desestructure todo*/
     const {titulo, empresa, ubicacion, salario, descripcion,
@@ -22,12 +23,12 @@ return (
                 </ul>
             </div>
             <footer className={styles.footer}>
-                <a 
-                    href={`/empleos/${id}`} 
+                <Link 
+                    to={`/empleo/${id}`} 
                     className={styles.button}
                 >
                     Ver oferta
-                </a>
+                </Link>
             </footer>
         </article>
         )

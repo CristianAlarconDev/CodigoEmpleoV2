@@ -9,15 +9,21 @@
   height: 100%; 
   display: flex;
   flex-direction: column;
+  overflow: hidden; 
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.card:hover {
+  transform: translateY(-5px) scale(1.02); 
+  box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.2); 
 }
 
 .content {
-  flex-grow: 1; /* Empuja el footer hacia abajo */
+  flex-grow: 1; /* Empuja el footer hacia abajo asi en cuadricula las card estan alineadas */
 }
 
-/* --- 2. Cabecera (Título y Subtítulo) --- */
+/* --- 2. Título y Subtítulo --- */
 .header {
-  margin-bottom: 0.5rem; /* Menos espacio si va la descripción */
+  margin-bottom: 0.5rem; 
 }
 
 .title {
@@ -42,9 +48,9 @@
   font-weight: var(--font-weight-regular);
   font-size: var(--font-size-body);
   color: var(--text-secondary);
-  margin: 1rem 0; /* Espacio vertical */
+  margin: 1rem 0; 
   
-  /* Limita la descripción a 3 líneas (opcional) */
+  /* Limita la descripción a 3 líneas */
   display: -webkit-box;
   -webkit-line-clamp: 3;
   line-clamp: 3;
@@ -54,7 +60,7 @@
 }
 
 
-/* --- 4. Lista de Metadata (tu <ul>) --- */
+/* --- 4. Lista de Metadata --- */
 .metadata {
   list-style: none;
   padding: 0;
@@ -70,7 +76,7 @@
 
 /* --- 5. Footer y Botón de Acción --- */
 .footer {
-  margin-top: 1rem; /* Espacio antes del botón */
+  margin-top: 1rem; 
 }
 
 .button {
@@ -86,8 +92,7 @@
     border-radius: var(--border-radius-btn);
     text-decoration: none;
     cursor: pointer;
-    transition: background-color 0.2s ease-in-out;
-}
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;}
 
 .button:hover {
     background-color: var(--color-primary-dark);
