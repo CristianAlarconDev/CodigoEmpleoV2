@@ -44,6 +44,14 @@
   /* Quitamos 'appearance' y 'background-image' para usar la flecha nativa */
 }
 
+.select:focus {
+  outline: none;
+  
+  border-color: var(--color-primary, #5e8ef7); 
+  
+  box-shadow: 0 0 0 3px rgba(113, 158, 255, 0.2); 
+}
+
 /* 6. Fieldset (Solo para semántica, sin bordes) */
 .fieldsetGroup {
   border: none;
@@ -53,24 +61,4 @@
 
 .legend {
   margin-bottom: 0.75rem; /* Espacio entre "Modalidad" y el 1er check */
-}
-
-/* 7. Checkboxes (Alineación mínima) */
-.checkboxWrapper {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem; /* Espacio entre el box y el label */
-  margin-bottom: 0.75rem; /* Espacio entre cada línea de checkbox */
-}
-
-/* Estilo mínimo para que el label sea legible */
-.checkboxWrapper label {
-  font-family: var(--font-family-sans);
-  color: var(--text-primary);
-  cursor: pointer;
-}
-
-.checkbox {
-  cursor: pointer;
-  /* Quitamos 'accent-color' para usar el color nativo del navegador */
 }
