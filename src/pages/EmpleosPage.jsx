@@ -1,4 +1,4 @@
-
+import { useEffect } from 'react';
 import EmpleosList from '../components/EmpleosList.jsx';
 import Filters from '../components/Filters.jsx';
 import Paginador from '../components/Paginador';
@@ -11,9 +11,9 @@ const EmpleosPage = () => {
   
     const { filtros, handleFilterChange, empleosFiltrados } = useEmpleosFilters(empleos);
 
-    const { datosPaginados:empleosParaMostrar, paginaActual, totalPaginas, irALaPagina } = usePaginacion(empleosFiltrados, 10);
+    const { datosPaginados:empleosParaMostrar, paginaActual, totalPaginas, irALaPagina } = usePaginacion(empleosFiltrados, 10, filtros);
 
-  return (
+    return (
     <div className="max-w-7xl mx-auto p-4 sm:p-6 lg:p-8">
       <h2 className="text-3xl font-bold text-gray-900 mb-8">
         Empleos 
