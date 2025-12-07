@@ -1,13 +1,10 @@
-import { useState, useEffect } from 'react';
-
-export const usePaginacion = (datos = [], itemsPorPagina = 10) => {
+import { useSearchParams} from 'react-router-dom'
+import {useEffect} from 'react'
+export const usePaginacion = (datos = [], itemsPorPagina = 10, dependenciaReset) => {
     //se setea la pagina inicial como la primera
-    const [paginaActual, setPaginaActual] = useState(1);
-
-    //si cambia la el array de empleos/cursos porque se aplicao algun filtro entonces se setea la primera pagina
-    useEffect(() => {
-        setPaginaActual(1);
-    }, [datos, itemsPorPagina]);
+    const [searchParams, setSearchParams] = useSearchParams();
+    const paginaUrl = searchParams.get('pagina');
+    const paginaActual = Number(paginaUrl) || 1;
 
     const safeData = datos || []; 
     const totalPaginas = Math.ceil(safeData.length / itemsPorPagina);
@@ -15,13 +12,25 @@ export const usePaginacion = (datos = [], itemsPorPagina = 10) => {
     const indiceInicial = indiceFinal - itemsPorPagina;
     const datosPaginados = safeData.slice(indiceInicial, indiceFinal);
 
-    //handler para setear una pagina nueva
     const irALaPagina = (numeroPagina) => {
-        // Validación para no salir del rango de indices
+        // por si se pone una url fuera de rango
         if (numeroPagina >= 1 && numeroPagina <= totalPaginas) {
-            setPaginaActual(numeroPagina);
+            // se actualizo la url
+            setSearchParams(prev => {
+                prev.set('pagina', numeroPagina);
+                return prev;
+            });
         }
     };
+    //cuando cambie las dependecias (por ahora solo filtros como array), se reinicia la paginacion con ir a la pagina 1
+    //de lo contraria al usar filtros si estaba en por ej pagina 3 quedaba vacio todo si la data filtrada no llegaba a la
+    //pagina3, revisar luego si es mejor manejarlo aca o donde
+    useEffect(() => {
+        if (paginaActual !== 1) {
+            irALaPagina(1);
+        }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [dependenciaReset]);
 
     return {
         paginaActual,
