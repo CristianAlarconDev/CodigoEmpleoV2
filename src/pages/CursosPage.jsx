@@ -24,14 +24,14 @@ const CursosPage = () => {
 
 
 return (
-  <div>
+  <div className="max-w-7xl mx-auto p-4 sm:p-6 lg:p-8">
     <h2 className="text-3xl font-bold text-gray-900 mb-8">
         Cursos
     </h2>
-    <div className="bg-white p-4 rounded-lg shadow-sm border border-gray-100 mb-8">
+    <div className="w-full lg:w-1/2 bg-white p-4 rounded-lg shadow-sm border border-gray-100 mb-8">
       <h3 className="text-xl font-bold text-gray-900 mb-6">Búsqueda</h3>
       <SearchBar valorBusqueda={filtros.busqueda} onSearchChange={handleFilterChange} placeholderString="Buscar por título, autor o tecnología..." />
-      </div>
+    </div>
     <div className="lg:col-span-1">
       <CursosFiltros filtrosSeleccionados={filtros} onFiltroChange={handleFilterChange}/>
     </div>
