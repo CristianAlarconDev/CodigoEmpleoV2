@@ -8,6 +8,7 @@ import LoginPage from '../pages/LoginPage';
 import CursoCardFull from '../components/CursoCardFull';
 import CRUDCurso from '../components/CRUDCurso';
 import EmpleoCardFull from '../components/EmpleoCardFull.jsx';
+import PerfilPage from '../pages/PerfilPage.jsx';
 
 const Rutas = () => {
   return (
@@ -15,7 +16,7 @@ const Rutas = () => {
     <Routes>
   
       <Route path="/" element={<HomePage />} />
-     
+    
       <Route path="/cursos" element={<CursosPage />} />
 
       <Route path="/empleos" element={<EmpleosPage />} />
@@ -24,12 +25,14 @@ const Rutas = () => {
 
       <Route path="/login" element={<LoginPage />} />
 
+      <Route path='/perfil' element={<PerfilPage/>}></Route>
+
       <Route path='/cursos/:id' element={<CursoCardFull/>}/>
 
       <Route path='/empleo/:id' element={< EmpleoCardFull/>}/>
 
       <Route path='/crud' element={<CRUDCurso/>}/>
-     
+    
       {/* <Route path="*" element={<NotFoundPage />} /> */}
 
     </Routes>
