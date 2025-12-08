@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import CursoCard from '../components/CursoCard';
 import SearchBar from '../components/SearchBar';
 import CursosFiltros from '../components/CursosFiltros';
+import Paginador from '../components/Paginador';
 import { useCursosFilters } from '../hooks/useCursosFilters';
 import { usePaginacion } from '../hooks/usePaginacion'
 import { CursosProvider, useCursosContext } from '../context/CursosContext';
@@ -34,13 +35,14 @@ return (
       ) : (
         // Grid de tarjetas usando las clases de Tailwind
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
-          {cursosFiltrados.map((item) => (
+          {cursosParaMostrar.map((item) => (
             <div key={item.id}>
               <CursoCard unCurso={item} />
             </div>
           ))}
         </div>
       )}
+      <Paginador paginaActual={paginaActual} totalPaginas={totalPaginas} onChangePagina={irALaPagina}/>
     </div>
     </div>
   );
