@@ -33,8 +33,10 @@ const EmpleosPage = () => {
       <div className="lg:col-span-3">
         {cargando? (<p>Buscando empleos...</p>):(<EmpleosList listaEmpleos={empleosParaMostrar} />
         )}
-        <Paginador paginaActual={paginaActual} totalPaginas={totalPaginas} onChangePagina={irALaPagina}/>
       </div>
+      </div>
+      <div className='mt-8 flex justify-center'>
+          <Paginador paginaActual={paginaActual} totalPaginas={totalPaginas} onChangePagina={irALaPagina}/>
       </div>
     </div>
   )
