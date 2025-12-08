@@ -1,0 +1,99 @@
+
+
+/* --- 1. Contenedor Principal de la Tarjeta --- */
+.card {
+  background-color: var(--color-surface);
+  border-radius: var(--border-radius-card);
+  box-shadow: var(--shadow-card);
+  padding: 1.5rem; /* 24px */
+  height: 100%; 
+  display: flex;
+  flex-direction: column;
+  overflow: hidden; 
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.card:hover {
+  transform: translateY(-5px) scale(1.02); 
+  box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.2); 
+}
+
+.content {
+  flex-grow: 1; /* Empuja el footer hacia abajo asi en cuadricula las card estan alineadas */
+}
+
+/* --- 2. Título y Subtítulo --- */
+.header {
+  margin-bottom: 0.5rem; 
+}
+
+.title {
+  font-family: var(--font-family-sans);
+  font-weight: var(--font-weight-bold);
+  font-size: var(--font-size-h3);
+  color: var(--text-primary);
+  margin: 0 0 0.25rem 0;
+}
+
+.subtitle {
+  font-family: var(--font-family-sans);
+  font-weight: var(--font-weight-medium);
+  font-size: var(--font-size-body);
+  color: var(--text-secondary);
+  margin: 0;
+}
+
+/* --- 3. Descripción --- */
+.description {
+  font-family: var(--font-family-sans);
+  font-weight: var(--font-weight-regular);
+  font-size: var(--font-size-body);
+  color: var(--text-secondary);
+  margin: 1rem 0; 
+  
+  /* Limita la descripción a 3 líneas */
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+
+/* --- 4. Lista de Metadata --- */
+.metadata {
+  list-style: none;
+  padding: 0;
+  margin: 1rem 0;
+  font-family: var(--font-family-sans);
+  font-size: var(--font-size-small);
+  color: var(--text-tertiary);
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem; /* 8px */
+}
+
+
+/* --- 5. Footer y Botón de Acción --- */
+.footer {
+  margin-top: 1rem; 
+}
+
+.button {
+    display: inline-block;
+    width: 100%; 
+    text-align: center;
+    background-color: var(--color-primary);
+    color: var(--text-on-primary);
+    font-family: var(--font-family-sans);
+    font-weight: var(--font-weight-medium);
+    padding: 0.75rem 1rem; 
+    border: none;
+    border-radius: var(--border-radius-btn);
+    text-decoration: none;
+    cursor: pointer;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;}
+
+.button:hover {
+    background-color: var(--color-primary-dark);
+}
