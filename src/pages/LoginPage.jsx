@@ -1,11 +1,11 @@
 import React from 'react'
 import { signInWithPopup } from "firebase/auth";
 import { autenticacion, googleProvider } from '../config/firebase';
-//import { useAutenticacionContext } from '../context/AutenticacionContext';
+import { useNavigate } from 'react-router-dom';
 
 
 const LoginPage = () => {
-    //const { login } = useAutenticacionContext();
+    const navigate =useNavigate()
 
     const handleGoogleLogin = async () => {
     try {
@@ -16,16 +16,7 @@ const LoginPage = () => {
         console.log("Email:", result.user.email);
         console.log("Foto URL:", result.user.photoURL);
         console.log("UID:", result.user.uid); 
-        
-        /*
-        const datosUsuario = {
-            nombre: result.user.displayName,
-            email: result.user.email,
-            fotoURL: result.user.photoURL
-        };*/
-        // Aca deberia redirigir o hacer algo tras el login,
-        // como guardalo en un contexto
-       // login(datosUsuario);
+        navigate('/perfil');
         } catch (error) {
         // manejar errores aca:
         console.error("Error durante el inicio de sesión:", error.message);
@@ -44,25 +35,13 @@ const LoginPage = () => {
             
             {/* boton, cambiar estilos luego */}
             <section>
-            <button 
-                type='button' 
-                onClick={handleGoogleLogin}
-                className="
-                flex items-center gap-2 mx-auto   
-                px-6 py-3                         
-                bg-white                           
-                rounded-lg                         
-                text-gray-700 font-medium        
-                hover:bg-gray-50                  
-                ">
-            
-                <img src="https://www.svgrepo.com/show/475656/google-color.svg" className="w-6 h-6" 
-                alt="Google logo" 
-                />
+            <button type='button' onClick={handleGoogleLogin}
+                className="flex items-center gap-2 mx-auto px-6 py-3 bg-white rounded-lg                         
+                text-gray-700 font-medium hover:bg-gray-50">
+                <img src="https://www.svgrepo.com/show/475656/google-color.svg" className="w-6 h-6" alt="Google logo" />
                 Continuar con Google
             </button>
             </section>
-
             </section>
         </section>
 
