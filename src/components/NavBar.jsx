@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { NavLink, Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { useAutenticacionContext } from '../context/AutenticacionContext';
 import { LogOut, Menu, User, X } from 'lucide-react';
 import Logo from './Logo';
@@ -7,11 +8,16 @@ import Logo from './Logo';
 const NavBar = () => {
   const { usuario, logout, esAdmin} = useAutenticacionContext();
   const [isOpen, setIsOpen] = useState(false);
-
-
+  const navigate = useNavigate();
 
   // Función para cerrar el menú móvil al hacer click en un enlace
   const closeMenu = () => setIsOpen(false);
+  const handleLogout = async () => {
+    await logout(); 
+    closeMenu();    
+    navigate('/');  
+  };
+
 
   // Estilos base para los links
   const linkBaseStyle = "px-3 py-2 rounded-md text-sm font-medium transition-all duration-300 ease-in-out block";
@@ -40,7 +46,9 @@ const NavBar = () => {
               <NavLink to="/empleos" className={getNavLinkClass}>Empleos</NavLink>
               <NavLink to="/recursos" className={getNavLinkClass}>Recursos</NavLink>
               {esAdmin(usuario) ? (<NavLink to="/crud" className={getNavLinkClass}>CRUD</NavLink>) :(<></>)}
-
+              {usuario && (
+                <NavLink to="/perfil" className={getNavLinkClass}>Mi Perfil</NavLink>
+              )}
               {/* SECCIÓN USUARIO DESKTOP */}
               {usuario ? (
                 <div className="flex items-center ml-4 gap-4 pl-4 border-l border-gray-700">
@@ -49,9 +57,7 @@ const NavBar = () => {
                       Hola, {usuario.nombre}
                    </span>
                    <button 
-                      onClick={logout} 
-                      className="flex items-center gap-2 bg-red-600 hover:bg-red-700 text-white px-3 py-1.5 rounded-md text-sm font-medium transition-colors shadow-sm"
-                   >
+                      onClick={handleLogout} className="flex items-center gap-2 bg-red-600 hover:bg-red-700 text-white px-3 py-1.5 rounded-md text-sm font-medium transition-colors shadow-sm">
                       <LogOut size={16} />
                       Salir
                    </button>
@@ -83,27 +89,29 @@ const NavBar = () => {
       <div className={`${isOpen ? 'block' : 'hidden'} md:hidden bg-gray-800 border-t border-gray-700`} id="mobile-menu">
         <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
           <NavLink to="/" onClick={closeMenu} className={getNavLinkClass} end>Home</NavLink>
+          {usuario && (
+              <NavLink to="/perfil" onClick={closeMenu} className={getNavLinkClass}>Mi Perfil</NavLink>
+          )}
           <NavLink to="/cursos" onClick={closeMenu} className={getNavLinkClass}>Cursos</NavLink>
           <NavLink to="/empleos" onClick={closeMenu} className={getNavLinkClass}>Empleos</NavLink>
           <NavLink to="/recursos" onClick={closeMenu} className={getNavLinkClass}>Recursos</NavLink>
           {esAdmin(usuario) ? (<p>True</p>) :(<p>false</p>)}
           
           <div className="border-t border-gray-700 mt-4 pt-4 pb-2">
-             {usuario ? (
+            {usuario ? (
                 <div className="flex flex-col gap-3 px-3">
-                   <div className="flex items-center gap-3 text-gray-300">
+                  <div className="flex items-center gap-3 text-gray-300">
                       <div className="bg-gray-700 p-2 rounded-full">
                         <User size={20} className="text-indigo-400"/>
                       </div>
                       <div className="font-medium">Hola, {usuario.nombre}</div>
-                   </div>
-                   <button 
-                      onClick={() => { logout(); closeMenu(); }}
+                  </div>
+                  <button onClick={() => { handleLogout }}
                       className="w-full flex items-center justify-center gap-2 bg-red-600 hover:bg-red-700 text-white px-3 py-2 rounded-md text-sm font-medium transition-colors mt-2"
-                   >
+                  >
                       <LogOut size={18} />
                       Cerrar Sesión
-                   </button>
+                  </button>
                 </div>
               ) : (
                 <NavLink to="/login" onClick={closeMenu} className={getNavLinkClass}>
