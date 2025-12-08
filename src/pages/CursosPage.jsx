@@ -25,8 +25,15 @@ const CursosPage = () => {
 
 return (
   <div>
+    <h2 className="text-3xl font-bold text-gray-900 mb-8">
+        Cursos
+    </h2>
+    <div className="bg-white p-4 rounded-lg shadow-sm border border-gray-100 mb-8">
+      <h3 className="text-xl font-bold text-gray-900 mb-6">Búsqueda</h3>
+      <SearchBar valorBusqueda={filtros.busqueda} onSearchChange={handleFilterChange} placeholderString="Buscar por título, autor o tecnología..." />
+      </div>
     <div className="lg:col-span-1">
-            <CursosFiltros filtrosSeleccionados={filtros} onFiltroChange={handleFilterChange}/>
+      <CursosFiltros filtrosSeleccionados={filtros} onFiltroChange={handleFilterChange}/>
     </div>
     <div className="max-w-7xl mx-auto my-8 px-4 sm:px-6 lg:px-8">
       {cargando ? (
