@@ -31,6 +31,7 @@ const EmpleosPage = () => {
             <p className="text-sm text-gray-500">Se encontraron <span className="font-bold text-gray-800">{meta.total}</span> resultados</p>
           </div>
           <EmpleosList listaEmpleos={empleos} />
+          {empleos.length === 0 && <p className="text-center mt-10">No hay resultados.</p>}
           </>
         )}
       </div>
