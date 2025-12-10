@@ -25,7 +25,13 @@ const EmpleosPage = () => {
         </div>
         
       <div className="lg:col-span-3">
-        {cargando? (<p>Buscando empleos...</p>):(<EmpleosList listaEmpleos={empleos} />
+        {cargando? (<p>Buscando empleos...</p>):(
+          <>
+          <div className="mb-4 flex justify-between items-center">
+            <p className="text-sm text-gray-500">Se encontraron <span className="font-bold text-gray-800">{meta.total}</span> resultados</p>
+          </div>
+          <EmpleosList listaEmpleos={empleos} />
+          </>
         )}
       </div>
       </div>
