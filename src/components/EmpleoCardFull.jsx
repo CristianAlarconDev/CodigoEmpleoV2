@@ -3,25 +3,26 @@ import { useParams, Link } from 'react-router-dom';
 import styles from './EmpleoCard.module.css'; 
 
 const EmpleoCardFull = () => {
-  const { id } = useParams();
-  
-  const url = `${import.meta.env.VITE_MOCKAPI_ENDPOINT_EMPLEOS}/${id}`;
+    const { id } = useParams();
 
-  const { data: empleo, cargando } = useFetch(url);
+    //const url = `${import.meta.env.VITE_MOCKAPI_ENDPOINT_EMPLEOS}/${id}`;
+    const URLEMPLEO = `${import.meta.env.VITE_API_BASE}/empleos/${id}`;
+    const { data: empleo, cargando, error } = useFetch(URLEMPLEO);
 
-  if (cargando) return <div className="p-4 text-center">Cargando detalles...</div>;
+    //const { data: empleo, cargando } = useFetch(url);
 
-  if (!empleo) return <div className="p-4 text-center">No se encontró el empleo.</div>;
-  /*misma idea que empleo card basica, solo se suma la idea de use params para el id y la 'redireccion 
-  al componente nuevo, ademas se suma la idea del use fetch para que siempre se tenga la info actualziada 
-  al ingresar al detalle de un empleo'*/
-  /*luego se va a cambiar la estructura cuando traiga info del backend */
-  return (
+    if (cargando) return <div className="p-4 text-center">Cargando detalles...</div>;
+
+    if (!empleo) return <div className="p-4 text-center">No se encontró el empleo.</div>;
+    /*misma idea que empleo card basica, solo se suma la idea de use params para el id y la 'redireccion 
+    al componente nuevo, ademas se suma la idea del use fetch para que siempre se tenga la info actualziada 
+    al ingresar al detalle de un empleo'*/
+    /*luego se va a cambiar la estructura cuando traiga info del backend */
+    return (
     <div className="container-detalle" style={{ padding: '2rem', maxWidth: '800px', margin: '0 auto' }}>
-      
         <div style={{ marginBottom: '1rem' }}>
             <Link to="/empleos" style={{ textDecoration: 'none', color: '#555' }}>
-              &larr; Volver al listado de empleos
+                &larr; Volver al listado de empleos
             </Link>
         </div>
 
@@ -54,14 +55,14 @@ const EmpleoCardFull = () => {
             <footer className={styles.footer}>
                 <button 
                     className={styles.button}
-                    onClick={() => alert(`Postulándose al empleo ${id}`)}
+                    onClick={() => alert(`Funcionalidad de postularse al ID: ${empleo._id}`)}
                 >
                     Postularme
                 </button>
             </footer>
         </article>
     </div>
-  );
+    );
 };
 
 export default EmpleoCardFull;
