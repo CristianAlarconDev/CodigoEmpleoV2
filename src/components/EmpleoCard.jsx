@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 const EmpleoCard = (props) => {
     /* Revisar si esto mejor llevarlo a otro lado, desestructure todo*/
     const {titulo, empresa, ubicacion, salario, descripcion,
-        modalidad, seniority, id}=props.dataEmpleo;
+        modalidad, seniority, _id}=props.dataEmpleo;
     
 
 return (
@@ -24,7 +24,7 @@ return (
             </div>
             <footer className={styles.footer}>
                 <Link 
-                    to={`/empleo/${id}`} 
+                    to={`/empleo/${_id}`} 
                     className={styles.button}
                 >
                     Ver oferta
