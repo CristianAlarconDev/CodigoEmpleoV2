@@ -13,7 +13,7 @@ const Filters = ({filtrosSeleccionados,onFiltroChange}) => {
           <label htmlFor="seniority-select" className={styles.legend}> Seniority</label>
           <select className={styles.select} name="seniority" id="seniority-select" 
           onChange={onFiltroChange} value={filtrosSeleccionados.seniority}>
-            <option value="todos">Todos</option>
+            <option value="">Todos</option>
             <option value="Trainee">Trainee</option>
             <option value="Junior">Junior</option>
             <option value="Semi Senior">Semi-Senior</option>
@@ -30,9 +30,9 @@ const Filters = ({filtrosSeleccionados,onFiltroChange}) => {
             onChange={onFiltroChange} 
             value={filtrosSeleccionados.modalidad}
           >
-            <option value="todos">Todas</option>
+            <option value="">Todas</option>
             <option value="Presencial">Presencial</option>
-            <option value="Hibrido">Híbrido</option>
+            <option value="Híbrido">Híbrido</option>
             <option value="Remoto">Remoto</option>
           </select>
         </div>
