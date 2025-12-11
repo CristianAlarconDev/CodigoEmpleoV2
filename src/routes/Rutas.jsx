@@ -27,8 +27,8 @@ const Rutas = () => {
 
       <Route path='/perfil' element={<PerfilPage/>}></Route>
 
-      <Route path='/cursos/:id' element={<CursoCardFull/>}/>
-
+      <Route path='/curso/:id' element={<CursoCardFull/>}/>
+      
       <Route path='/empleo/:id' element={< EmpleoCardFull/>}/>
 
       <Route path='/crud' element={<CRUDCurso/>}/>

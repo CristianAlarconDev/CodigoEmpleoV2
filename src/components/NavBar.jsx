@@ -1,33 +1,34 @@
 import React, { useState } from 'react'
-import { NavLink, Link } from 'react-router-dom';
-import { useNavigate } from 'react-router-dom';
+import { NavLink, Link, useNavigate } from 'react-router-dom';
 import { useAutenticacionContext } from '../context/AutenticacionContext';
-import { LogOut, Menu, User, X } from 'lucide-react';
-import Logo from './Logo';
+import { LogOut, Menu, User, X, Shield } from 'lucide-react';
+import Logo from './Logo'; 
 
 const NavBar = () => {
-  const { usuario, logout, esAdmin} = useAutenticacionContext();
+  const { usuario, logout, esAdmin } = useAutenticacionContext();
   const [isOpen, setIsOpen] = useState(false);
   const navigate = useNavigate();
 
-  // Función para cerrar el menú móvil al hacer click en un enlace
   const closeMenu = () => setIsOpen(false);
+
   const handleLogout = async () => {
     await logout(); 
     closeMenu();    
     navigate('/');  
   };
 
-
-  // Estilos base para los links
+  // Estilos base para los links normales
   const linkBaseStyle = "px-3 py-2 rounded-md text-sm font-medium transition-all duration-300 ease-in-out block";
   
-  // Lógica de estilos para NavLink (Activo vs Inactivo)
+  // Función para manejar el estado Activo/Inactivo de los links
   const getNavLinkClass = ({ isActive }) => {
     return isActive
-      ? `${linkBaseStyle} bg-indigo-600 text-white shadow-md transform scale-105` // Estilo Activo
-      : `${linkBaseStyle} text-gray-300 hover:bg-gray-700 hover:text-white hover:shadow-sm`; // Estilo Inactivo + Hover
+      ? `${linkBaseStyle} text-white bg-gray-800 shadow-sm border-b-2 border-blue-500` 
+      : `${linkBaseStyle} text-gray-300 hover:bg-gray-700 hover:text-white`; 
   };
+
+ 
+  const loginButtonStyle = "px-5 py-2 rounded-full text-sm font-bold transition-all duration-300 ease-in-out block bg-blue-600 text-white hover:bg-blue-700 shadow-md hover:shadow-lg hover:-translate-y-0.5 text-center";
 
   return (
     <nav className="bg-gray-900 shadow-lg border-b border-gray-800 sticky top-0 z-50">
@@ -35,89 +36,119 @@ const NavBar = () => {
         <div className="flex items-center justify-between h-16">
           
           {/* LOGO */}
-          <Link to="/" className="hover:opacity-90 transition-opacity">
+          <Link to="/" className="hover:opacity-90 transition-opacity shrink-0" onClick={closeMenu}>
             <Logo />
           </Link>
 
-          {/* MENÚ DESKTOP (Oculto en móvil) */}
+          {/* === MENÚ DESKTOP === */}
           <div className="hidden md:block">
-            <div className="ml-10 flex items-baseline space-x-4">
+            <div className="ml-10 flex items-center space-x-4">
               <NavLink to="/cursos" className={getNavLinkClass}>Cursos</NavLink>
               <NavLink to="/empleos" className={getNavLinkClass}>Empleos</NavLink>
               <NavLink to="/recursos" className={getNavLinkClass}>Recursos</NavLink>
-              {esAdmin(usuario) ? (<NavLink to="/crud" className={getNavLinkClass}>CRUD</NavLink>) :(<></>)}
+              
+              {/* Link de Admin (Solo si es admin) */}
+              {esAdmin(usuario) && (
+                <NavLink to="/crud" className={getNavLinkClass}>
+                    <span className="flex items-center gap-1 text-yellow-500"><Shield size={16}/> Admin</span>
+                </NavLink>
+              )}
+
               {usuario && (
                 <NavLink to="/perfil" className={getNavLinkClass}>Mi Perfil</NavLink>
               )}
-              {/* SECCIÓN USUARIO DESKTOP */}
-              {usuario ? (
-                <div className="flex items-center ml-4 gap-4 pl-4 border-l border-gray-700">
-                   <span className="text-gray-300 text-sm flex items-center gap-2">
-                      <User size={16} className="text-indigo-400"/>
-                      Hola, {usuario.nombre}
-                   </span>
-                   <button 
-                      onClick={handleLogout} className="flex items-center gap-2 bg-red-600 hover:bg-red-700 text-white px-3 py-1.5 rounded-md text-sm font-medium transition-colors shadow-sm">
-                      <LogOut size={16} />
-                      Salir
-                   </button>
-                </div>
-              ) : (
-                <NavLink to="/login" className={getNavLinkClass}>Login</NavLink>
-              )}
+
+              {/* SECCIÓN USUARIO / LOGIN */}
+              <div className="ml-4 pl-4 border-l border-gray-700 flex items-center gap-4">
+                {usuario ? (
+                    <>
+                        <span className="text-gray-300 text-sm flex items-center gap-2">
+                            <User size={16} className="text-blue-400"/>
+                            <span className="truncate max-w-[150px]">{usuario.nombre}</span>
+                        </span>
+                        <button 
+                            onClick={handleLogout} 
+                            className="flex items-center gap-2 bg-gray-800 hover:bg-red-600 text-white px-3 py-1.5 rounded-md text-sm font-medium transition-all border border-gray-700 hover:border-red-600"
+                        >
+                            <LogOut size={16} />
+                        </button>
+                    </>
+                ) : (
+                    <NavLink to="/login" className={loginButtonStyle}>
+                        Iniciar Sesión
+                    </NavLink>
+                )}
+              </div>
             </div>
           </div>
 
-          {/* BOTÓN HAMBURGUESA MÓVIL (Visible solo en móvil) */}
+          {/* === BOTÓN HAMBURGUESA MÓVIL === */}
           <div className="-mr-2 flex md:hidden">
             <button
               onClick={() => setIsOpen(!isOpen)}
               type="button"
-              className="bg-gray-800 inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white transition-colors"
-              aria-controls="mobile-menu"
-              aria-expanded="false"
+              className="bg-gray-800 inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-none transition-colors"
             >
-              <span className="sr-only">Abrir menú principal</span>
+              <span className="sr-only">Abrir menú</span>
               {isOpen ? <X size={24} /> : <Menu size={24} />}
             </button>
           </div>
         </div>
       </div>
 
-      {/* MENÚ MÓVIL DESPLEGABLE */}
-      {/* Animación simple de altura/opacidad con clases condicionales */}
-      <div className={`${isOpen ? 'block' : 'hidden'} md:hidden bg-gray-800 border-t border-gray-700`} id="mobile-menu">
-        <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+      {/* === MENÚ MÓVIL DESPLEGABLE === */}
+      <div className={`${isOpen ? 'block' : 'hidden'} md:hidden bg-gray-900 border-t border-gray-800 shadow-xl`} id="mobile-menu">
+        <div className="px-4 pt-4 pb-6 space-y-2">
+          
           <NavLink to="/" onClick={closeMenu} className={getNavLinkClass} end>Home</NavLink>
-          {usuario && (
-              <NavLink to="/perfil" onClick={closeMenu} className={getNavLinkClass}>Mi Perfil</NavLink>
-          )}
           <NavLink to="/cursos" onClick={closeMenu} className={getNavLinkClass}>Cursos</NavLink>
           <NavLink to="/empleos" onClick={closeMenu} className={getNavLinkClass}>Empleos</NavLink>
           <NavLink to="/recursos" onClick={closeMenu} className={getNavLinkClass}>Recursos</NavLink>
-          {esAdmin(usuario) ? (<p>True</p>) :(<p>false</p>)}
           
-          <div className="border-t border-gray-700 mt-4 pt-4 pb-2">
+          {/* Admin Móvil  */}
+          {esAdmin(usuario) && (
+            <NavLink 
+                to="/crud" 
+                onClick={closeMenu} 
+                className={({ isActive }) => 
+                    isActive 
+                    ? `${linkBaseStyle} bg-gray-800 text-yellow-500 border-b-2 border-yellow-500` 
+                    : `${linkBaseStyle} text-yellow-500 hover:bg-gray-700`
+                }
+            >
+                 Panel Admin
+            </NavLink>
+          )}
+          
+          {usuario && (
+              <NavLink to="/perfil" onClick={closeMenu} className={getNavLinkClass}>Mi Perfil</NavLink>
+          )}
+
+          <div className="border-t border-gray-700 mt-4 pt-4">
             {usuario ? (
-                <div className="flex flex-col gap-3 px-3">
-                  <div className="flex items-center gap-3 text-gray-300">
-                      <div className="bg-gray-700 p-2 rounded-full">
-                        <User size={20} className="text-indigo-400"/>
+                <div className="flex flex-col gap-4">
+                  <div className="flex items-center gap-3 text-gray-300 px-2">
+                      <div className="bg-gray-800 p-2 rounded-full border border-gray-700">
+                        <User size={20} className="text-blue-400"/>
                       </div>
-                      <div className="font-medium">Hola, {usuario.nombre}</div>
+                      <div className="font-medium truncate">{usuario.nombre}</div>
                   </div>
-                  <button onClick={() => { handleLogout }}
-                      className="w-full flex items-center justify-center gap-2 bg-red-600 hover:bg-red-700 text-white px-3 py-2 rounded-md text-sm font-medium transition-colors mt-2"
+                  
+                  {/* LOGOUT MÓVIL  */}
+                  <button onClick={handleLogout}
+                      className="w-full flex items-center justify-center gap-2 bg-red-600 hover:bg-red-700 text-white px-3 py-3 rounded-lg text-sm font-bold transition-colors"
                   >
                       <LogOut size={18} />
                       Cerrar Sesión
                   </button>
                 </div>
-              ) : (
-                <NavLink to="/login" onClick={closeMenu} className={getNavLinkClass}>
-                    Login
-                </NavLink>
-              )}
+            ) : (
+                <div className="px-2">
+                    <NavLink to="/login" onClick={closeMenu} className={loginButtonStyle}>
+                        Iniciar Sesión
+                    </NavLink>
+                </div>
+            )}
           </div>
         </div>
       </div>
@@ -125,4 +156,4 @@ const NavBar = () => {
   )
 }
 
-export default NavBar
+export default NavBar;

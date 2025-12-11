@@ -1,9 +1,14 @@
 import { useFetch } from '../hooks/useFetch';
 import { useParams, Link } from 'react-router-dom';
 import styles from './EmpleoCard.module.css'; 
-
+import { useAutenticacionContext } from '../context/AutenticacionContext';
 const EmpleoCardFull = () => {
     const { id } = useParams();
+    const { usuario, toggleEmpleo, postularse } = useAutenticacionContext();
+    // Verificaciones
+    const esFavorito = usuario?.empleos_guardados?.some(e => (e._id === id) || (e === id));
+    const yaPostulado = usuario?.postulaciones?.some(p => (p.empleo._id === id) || (p.empleo === id));
+
     const URLEMPLEO = `${import.meta.env.VITE_API_BASE}/empleos/${id}`;
     const { data: empleo, cargando, error } = useFetch(URLEMPLEO);
 
@@ -61,12 +66,25 @@ const EmpleoCardFull = () => {
             </div>
 
             <footer className={styles.footer}>
-                <button 
-                    className={styles.button}
-                    onClick={() => alert(`Funcionalidad de postularse al ID: ${empleo._id}`)}
-                >
-                    Postularme
+                <div className="flex gap-4 justify-end w-full">
+                <button onClick={() => usuario ? toggleEmpleo(id) : alert("Inicia sesión")}
+                        className={`px-6 py-3 rounded-lg font-bold border transition-colors ${
+                            esFavorito 
+                            ? 'bg-gray-800 text-white border-gray-800' 
+                            : 'bg-white text-blue-600 border-blue-600 hover:bg-blue-50'
+                        }`}
+                >{esFavorito ? 'Guardado' : 'Guardar'}
                 </button>
+                <button onClick={() => usuario ? postularse(id) : alert("Inicia sesión")}
+                        disabled={yaPostulado}
+                        className={`font-bold py-3 px-8 rounded-lg transition-all shadow-md ${
+                            yaPostulado 
+                            ? 'bg-green-600 text-white opacity-90 cursor-default' // Ya postulado
+                            : 'bg-blue-600 hover:bg-blue-700 text-white hover:-translate-y-0.5' // Normal
+                        }`}
+                >{yaPostulado ? 'Ya Postulado' : 'Postularme ahora'}
+                </button>
+                </div>
             </footer>
         </article>
     </div>

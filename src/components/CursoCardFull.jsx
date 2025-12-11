@@ -1,10 +1,13 @@
 import { useParams,Link } from "react-router-dom";
 import { Award, BookOpen, Clock, User } from "lucide-react";
 import { useFetch } from "../hooks/useFetch";
-
+import { useAutenticacionContext } from '../context/AutenticacionContext';
 function CursoCardFull(){
-
   const { id } = useParams();
+  const { usuario, toggleCurso } = useAutenticacionContext();
+  const esFavorito = usuario?.cursos_guardados?.some(c => (c._id === id) || (c === id));
+  
+  
   const URLCURSO = `${import.meta.env.VITE_API_BASE}/cursos/${id}`;
   const { data: curso, cargando, error } = useFetch(URLCURSO);
 
@@ -73,6 +76,18 @@ function CursoCardFull(){
           <Link to="/cursos" className="text-gray-500 hover:text-blue-600 font-medium">
             &larr; Volver
           </Link>
+          <div className="flex gap-3 w-full sm:w-auto">
+          <button 
+                onClick={() => usuario ? toggleCurso(id) : alert("Inicia sesión para guardar")}
+                className={`flex-1 sm:flex-none px-6 py-3 rounded-lg font-bold transition-all border ${
+                    esFavorito 
+                    ? 'bg-gray-800 text-white border-gray-800 hover:bg-gray-900' // Estado Guardado (Oscuro/Serio)
+                    : 'bg-white text-blue-600 border-blue-600 hover:bg-blue-50'   // Estado Normal (Outline Azul)
+                }`}
+              >
+                {esFavorito ? 'Guardado' : 'Guardar Curso'}
+          </button>
+
           {/* Reemplzar con url de mongo luego*/}
           <button 
             className="bg-green-500 hover:bg-green-600 text-white font-bold py-3 px-8 rounded-lg shadow hover:shadow-md transition-all duration-200 transform hover:-translate-y-1 flex items-center gap-2"
@@ -80,8 +95,8 @@ function CursoCardFull(){
             <BookOpen size={20} />
             Ir al curso
           </button>
+          </div>
         </div>
-
       </div>
     </div>
   )
