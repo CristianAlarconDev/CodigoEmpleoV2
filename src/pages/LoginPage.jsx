@@ -18,7 +18,7 @@ const LoginPage = () => {
     };
 
     return (
-        <div className="min-h-screen flex items-center justify-center bg-gray-50 px-4">
+        <div className=" container mx-auto p-4 mt-6 min-h-screen flex items-center justify-center bg-gray-50 px-4">
             
             {/* Tarjeta Principal */}
             <div className="max-w-md w-full bg-white rounded-2xl shadow-xl overflow-hidden border border-gray-100">

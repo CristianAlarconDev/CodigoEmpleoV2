@@ -7,11 +7,13 @@ import Rutas from './routes/Rutas';
 const App = () => {
   return (
     <BrowserRouter>
+    <div className="flex flex-col min-h-screen bg-gray-50">
       <NavBar />
-      <main className="container mx-auto mt-7">
+      <main className="flex-grow">
         <Rutas />
       </main>
       <Footer/>
+      </div>
     </BrowserRouter>
   );
 };

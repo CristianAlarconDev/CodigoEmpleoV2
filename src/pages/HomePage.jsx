@@ -18,7 +18,7 @@ const HomePage = () => {
   const empleosRecientes = resEmpleos?.data || [];
 
   return (
-    <div className="flex flex-col min-h-screen bg-gray-50">
+    <div className="container mx-auto p-4 mt-6 flex flex-col min-h-screen bg-gray-50">
       
       {/* Hero Section simple (Opcional, para dar bienvenida) */}
       <section className="bg-slate-900 text-white py-16 px-4 text-center">

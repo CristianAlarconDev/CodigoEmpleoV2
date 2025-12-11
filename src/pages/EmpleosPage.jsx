@@ -8,7 +8,7 @@ const EmpleosPage = () => {
     const { empleos, meta, cargando, busqueda, filtros, acciones } = useEmpleos();
 
     return (
-    <div className="max-w-7xl mx-auto p-4 sm:p-6 lg:p-8">
+    <div className=" container mx-auto p-4 mt-6 max-w-7xl sm:p-6 lg:p-8">
       <h2 className="text-3xl font-bold text-gray-900 mb-8">
         Empleos 
       </h2>
