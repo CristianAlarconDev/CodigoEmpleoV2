@@ -8,9 +8,21 @@ function CursoCardFull(){
   const URLCURSO = `${import.meta.env.VITE_API_BASE}/cursos/${id}`;
   const { data: curso, cargando, error } = useFetch(URLCURSO);
 
-  if (cargando) return <div className="p-10 text-center">Cargando...</div>;
+    if (cargando) return (
+    <div className="flex justify-center items-center h-screen">
+      <div className="animate-spin rounded-full h-12 w-12 border-t-4 border-b-4 border-blue-600"></div>
+    </div>
+    )
   
-  if (!curso) return <div className="p-10 text-center">No se encontró el curso.</div>;
+    if (error || !curso) return (
+    <div className="flex flex-col items-center justify-center h-64">
+      <h2 className="text-xl font-bold text-gray-700">No encontramos ese curso.</h2>
+      <p className="text-gray-500 mb-4">Es posible que haya expirado o el enlace sea incorrecto.</p>
+      <Link to="/cursos" className="text-blue-600 hover:underline">
+              &larr; Volver al listado
+      </Link>
+    </div>
+    )
 
     return(
     // Contenedor de la tarjeta: Fondo blanco, sombra, bordes redondeados
