@@ -48,7 +48,7 @@ export const AutenticacionProvider = ({ children }) => {
             const res = await fetch(`${API_URL}/${usuario.firebase_uid}/favoritos/empleo`, {
                 method: 'PUT',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ idEmpleo }) // Tu backend espera 'idEmpleo'
+                body: JSON.stringify({ idEmpleo })
             });
             if (res.ok) {
                 const data = await res.json();
@@ -63,7 +63,7 @@ export const AutenticacionProvider = ({ children }) => {
             const res = await fetch(`${API_URL}/${usuario.firebase_uid}/postular`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ idEmpleo }) // Tu backend espera 'idEmpleo'
+                body: JSON.stringify({ idEmpleo }) 
             });
             if (res.ok) {
                 const data = await res.json();
