@@ -1,11 +1,19 @@
 import React from 'react';
-import { useUsuarioContext } from '../context/UsuarioContext';
+import { useAutenticacionContext } from '../context/AutenticacionContext';
+import { Link } from 'react-router-dom';
 const PerfilPage = () => {
   
-  const { usuario } = useUsuarioContext();
+  //const { usuario } = useUsuarioContext();
+  const { usuario, cargandoAuth } = useAutenticacionContext();
+  //si esta cargando que se vea el spin o si no hay usuario
+  if (cargandoAuth || !usuario) {
+    return (
+      <div className="flex justify-center items-center h-screen">
+        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
+      </div>
+    );
+  }
 
-  //console.log("Esto es el usuario :", usuario)
-  //sin usuario muestra un cargando
   if (!usuario) {
     return (
       <div className="flex justify-center items-center h-screen">
@@ -20,14 +28,19 @@ const PerfilPage = () => {
       <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-6 mb-8 flex flex-col md:flex-row items-center gap-6">
         
         {/* FOTO DE PERFIL , VIENE DE FIREBASE POR AHORA */}
-        <img src={usuario.photoURL} alt="Foto Perfil" className="w-24 h-24 rounded-full border-4 border-blue-50 object-cover"/>
+        <img src={usuario.imagen||usuario.photoURL } alt="Foto Perfil" className="w-24 h-24 rounded-full border-4 border-blue-50 object-cover"
+        onError={(e) => {
+        e.target.onerror = null; // Previene bucles infinitos
+        e.target.src = "https://ui-avatars.com/api/?name=" + usuario.nombre + "&background=random";
+        }}
+        />
         <div className="text-center md:text-left">
-            <h1 className="text-3xl font-bold text-gray-900">{usuario.displayName}</h1>
+            <h1 className="text-3xl font-bold text-gray-900">{usuario.nombre || usuario.displayName}</h1>
             <p className="text-gray-500">{usuario.email}</p>
             <div className="mt-3">
               {/*alguna etiqueta de rol luego, por ahora un estudiante */}
                 <span className="bg-blue-100 text-blue-800 text-xs px-3 py-1 rounded-full font-medium">
-                    {usuario.rol || "Estudiante"}
+                    {usuario.rol || "Usuario"}
                 </span>
             </div>
         </div>
