@@ -9,7 +9,7 @@ const App = () => {
     <BrowserRouter>
     <div className="flex flex-col min-h-screen bg-gray-50">
       <NavBar />
-      <main className="flex-grow">
+      <main className="grow">
         <Rutas />
       </main>
       <Footer/>
