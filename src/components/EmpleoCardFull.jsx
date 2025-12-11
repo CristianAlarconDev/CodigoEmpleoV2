@@ -4,14 +4,14 @@ import styles from './EmpleoCard.module.css';
 
 const EmpleoCardFull = () => {
     const { id } = useParams();
-
-    //const url = `${import.meta.env.VITE_MOCKAPI_ENDPOINT_EMPLEOS}/${id}`;
     const URLEMPLEO = `${import.meta.env.VITE_API_BASE}/empleos/${id}`;
     const { data: empleo, cargando, error } = useFetch(URLEMPLEO);
 
-    //const { data: empleo, cargando } = useFetch(url);
-
-    if (cargando) return <div className="p-4 text-center">Cargando detalles...</div>;
+    if (cargando) return (
+        <div className="flex justify-center items-center h-screen">
+            <div className="animate-spin rounded-full h-12 w-12 border-t-4 border-b-4 border-blue-600"></div>
+        </div>
+    );
 
     if (!empleo) return <div className="p-4 text-center">No se encontró el empleo.</div>;
     /*misma idea que empleo card basica, solo se suma la idea de use params para el id y la 'redireccion 
