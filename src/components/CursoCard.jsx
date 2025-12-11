@@ -9,11 +9,11 @@ const CursoCard = ({ unCurso }) => {
                 hover:translate-y-[-5px] hover:shadow-2xl"> 
       
       
-      <div className="h-48 w-full bg-gray-200 relative">
+      <div className="h-48 w-full bg-white relative flex justify-center items-center overflow-hidden border-b border-gray-100">
         <img
             src={unCurso.imagen}
             alt={unCurso.titulo}
-            className="w-full h-full object-cover" 
+            className="w-full h-full object-contain p-6 transition-transform duration-500 hover:scale-110" 
             onError={(e) => e.target.src = "https://via.placeholder.com/300x200?text=Curso"}
         />
       </div>
