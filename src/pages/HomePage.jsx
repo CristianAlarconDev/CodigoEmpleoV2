@@ -21,7 +21,7 @@ const HomePage = () => {
     <div className="flex flex-col min-h-screen bg-gray-50">
       
       {/* Hero Section simple (Opcional, para dar bienvenida) */}
-      <section className="bg-blue-600 text-white py-16 px-4 text-center">
+      <section className="bg-slate-900 text-white py-16 px-4 text-center">
           <h1 className="text-4xl md:text-5xl font-bold mb-4">Encuentra tu futuro IT</h1>
           <p className="text-xl max-w-2xl mx-auto opacity-90">
               La plataforma donde conectamos talento con oportunidades. Cursos para crecer y empleos para despegar.
