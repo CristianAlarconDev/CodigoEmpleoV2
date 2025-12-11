@@ -25,7 +25,10 @@ return (
       </div>
       {cargando ? (
         // Estado de carga
-        <p className="text-center text-xl text-gray-600">Buscando cursos...</p>
+        <div className="flex flex-col justify-center items-center h-64">
+          <div className="animate-spin rounded-full h-12 w-12 border-t-4 border-b-4 border-blue-600 mb-4"></div>
+          <p className="text-gray-500 animate-pulse">Buscando cursos...</p>
+        </div>
       ) : (
         // Grid de tarjetas usando las clases de Tailwind
         <>
