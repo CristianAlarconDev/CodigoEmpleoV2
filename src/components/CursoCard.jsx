@@ -23,7 +23,7 @@ const CursoCard = ({ unCurso }) => {
           Autor: {unCurso.autor}
         </p>
         
-        <Link to={'/cursos/'+ unCurso._id}>
+        <Link to={'/curso/'+ unCurso._id}>
         <button 
           className="w-full bg-blue-600 text-white font-semibold py-1.5 px-4 rounded-lg 
                     transition duration-300 ease-in-out 
