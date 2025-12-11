@@ -26,8 +26,58 @@ export const AutenticacionProvider = ({ children }) => {
         if (!user || !user.email) return false;
         return(administradores.includes(user.email))
     }
+    const toggleCurso = async (idCurso) => {
+        if (!usuario) return;
+        try {
+            const res = await fetch(`${API_URL}/${usuario.firebase_uid}/favoritos/curso`, {
+                method: 'PUT',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ idCurso }) // Tu backend espera 'idCurso'
+            });
+            if (res.ok) {
+                const data = await res.json();
+                // Actualizo solo el array local
+                setUsuario(prev => ({ ...prev, cursos_guardados: data.cursos_guardados }));
+            }
+        } catch (error) { console.error(error); }
+    };
+
+    const toggleEmpleo = async (idEmpleo) => {
+        if (!usuario) return;
+        try {
+            const res = await fetch(`${API_URL}/${usuario.firebase_uid}/favoritos/empleo`, {
+                method: 'PUT',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ idEmpleo }) // Tu backend espera 'idEmpleo'
+            });
+            if (res.ok) {
+                const data = await res.json();
+                setUsuario(prev => ({ ...prev, empleos_guardados: data.empleos_guardados }));
+            }
+        } catch (error) { console.error(error); }
+    };
     
-    
+    const postularse = async (idEmpleo) => {
+        if (!usuario) return;
+        try {
+            const res = await fetch(`${API_URL}/${usuario.firebase_uid}/postular`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ idEmpleo }) // Tu backend espera 'idEmpleo'
+            });
+            if (res.ok) {
+                const data = await res.json();
+                setUsuario(prev => ({ ...prev, postulaciones: data.postulaciones }));
+                alert("¡Te has postulado con éxito!");
+                return true; // Para tener una bander por si se logro la solicitud
+            } else {
+                const errorData = await res.json();
+                alert(errorData.message); // Mostrar "Ya te has postulado", etc.
+                return false;
+            }
+        } catch (error) { console.error(error); return false; }
+    };
+
     useEffect(() => {
         /*abro el 'listener' */
         const unsubscribe = onAuthStateChanged(autenticacion, async(firebaseUser) => {
@@ -96,7 +146,7 @@ export const AutenticacionProvider = ({ children }) => {
         usuario,
         cargandoAuth,
         logout,
-        esAdmin
+        esAdmin,toggleCurso, toggleEmpleo, postularse
     }
     return (
         
