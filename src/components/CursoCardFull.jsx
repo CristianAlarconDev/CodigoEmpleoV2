@@ -1,33 +1,12 @@
-import { useParams } from "react-router-dom";
-import { CursosProvider, useCursosContext } from "../context/CursosContext";
-import { useEffect, useState } from "react";
+import { useParams,Link } from "react-router-dom";
 import { Award, BookOpen, Clock, User } from "lucide-react";
+import { useFetch } from "../hooks/useFetch";
 
 function CursoCardFull(){
 
   const { id } = useParams();
-  const { obtenerUnCurso } = useCursosContext(); 
-  const [curso, setCurso] = useState(null); 
-  const [cargando, setCargando] = useState(true);
-
-  useEffect(() => {
-    setCargando(true);
-    setCurso(null); // Limpiamos para evitar ver el anterior
-
-    const fetchDetail = async () => {
-      // Ahora obtenerUnCurso busca en el array y nos da el objeto
-      const resultado = await obtenerUnCurso(id);
-      
-      if (resultado) {
-        setCurso(resultado);
-      } else {
-        console.error("Curso no encontrado con ID:", id);
-      }
-      setCargando(false);
-    };
-
-    fetchDetail();
-  }, [id]);
+  const URLCURSO = `${import.meta.env.VITE_API_BASE}/cursos/${id}`;
+  const { data: curso, cargando, error } = useFetch(URLCURSO);
 
   if (cargando) return <div className="p-10 text-center">Cargando...</div>;
   
@@ -40,11 +19,7 @@ function CursoCardFull(){
       {/* Sección de la Imagen (Izquierda) */}
       {/* md:w-1/3 define que ocupe un tercio del ancho en pantallas medianas/grandes */}
       <div className="md:w-1/3 h-64 md:h-auto relative">
-        <img 
-          src={curso.imagen} 
-          alt={curso.titulo} 
-          className="w-full h-full object-cover"
-        />
+        <img src={curso.imagen} alt={curso.titulo} className="w-full h-full object-cover"/>
       </div>
 
       {/* Sección del Contenido (Derecha) */}
@@ -74,16 +49,22 @@ function CursoCardFull(){
         </div>
 
         {/* Descripción */}
-        <div className="text-gray-600 text-justify mb-6 leading-relaxed flex-grow">
-          <p>Aca deberiamos agregar una descripcion del curso</p>
+        <div className="text-gray-600 text-justify mb-6 leading-relaxed grow">
+          <h3 className="font-bold text-gray-800 mb-2">Descripción</h3>
+          <p className="whitespace-pre-line">
+            {curso.descripcion || "Este curso no tiene descripción disponible por el momento."}
+          </p>
         </div>
 
         {/* Botón */}
-        <div className="flex justify-end mt-4">
+        <div className="flex justify-between items-center mt-4 pt-4 border-t border-gray-100">
+          <Link to="/cursos" className="text-gray-500 hover:text-blue-600 font-medium">
+            &larr; Volver
+          </Link>
+          {/* Reemplzar con url de mongo luego*/}
           <button 
-    
             className="bg-green-500 hover:bg-green-600 text-white font-bold py-3 px-8 rounded-lg shadow hover:shadow-md transition-all duration-200 transform hover:-translate-y-1 flex items-center gap-2"
-          >
+            onClick={() => alert(`Redirigiendo al curso real...`)}>
             <BookOpen size={20} />
             Ir al curso
           </button>
