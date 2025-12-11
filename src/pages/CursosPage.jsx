@@ -45,9 +45,11 @@ return (
       )}
     </div>
     </div>
-    <div className="mt-8 flex justify-center">
-      <Paginador paginaActual={meta.page} totalPaginas={meta.totalPages} onChangePagina={acciones.cambiarPagina}/>
-    </div>
+    {!cargando && meta.totalPages > 1 && (
+        <div className="mt-8 flex justify-center">
+          <Paginador paginaActual={meta.page} totalPaginas={meta.totalPages} onChangePagina={acciones.cambiarPagina}/>
+        </div>
+      )}
     </div>
   );
 };
