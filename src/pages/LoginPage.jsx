@@ -9,13 +9,15 @@ const LoginPage = () => {
 
     const handleGoogleLogin = async () => {
     try {
+        // eslint-disable-next-line no-unused-vars
         const result =await signInWithPopup(autenticacion, googleProvider);
-        
+        /*
         console.log("Usuario logueado!");
         console.log("Nombre:", result.user.displayName);
         console.log("Email:", result.user.email);
         console.log("Foto URL:", result.user.photoURL);
-        console.log("UID:", result.user.uid); 
+        console.log("UID:", result.user.uid); */
+        console.log("Login exitoso con Google")
         navigate('/perfil');
         } catch (error) {
         // manejar errores aca:
@@ -30,7 +32,7 @@ const LoginPage = () => {
             {/* texto */}
             <section className="mb-6"> 
                 <h2 className="text-2xl font-bold text-gray-800 mb-2">Iniciar Sesión</h2>
-                <p className="text-gray-600">Inicia sesión para guardar tus postulaciones.</p>
+                <p className="text-gray-600">Inicia sesión para guardar tus cursos y postulaciones.</p>
             </section>
             
             {/* boton, cambiar estilos luego */}
