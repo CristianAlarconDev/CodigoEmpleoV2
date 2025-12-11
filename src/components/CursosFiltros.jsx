@@ -10,28 +10,6 @@ const CursosFiltros = ({ filtrosSeleccionados, onFiltroChange }) => {
       <h3 className="text-xl font-bold text-gray-800 mb-6">Filtros</h3>
       
       <div className="space-y-4">
-        
-        {/* filtro tecnologia */}
-        <div>
-          <label className={labelClass}>Tecnología</label>
-          <select 
-            name="tecnologia"
-            value={filtrosSeleccionados.tecnologia}
-            onChange={onFiltroChange}
-            className={selectClass}
-          >
-            <option value="todos">Todas</option>
-            <option value="React">React</option>
-            <option value="Angular">Angular</option>
-            <option value="Vue">Vue</option>
-            <option value="Python">Python</option>
-            <option value="Java">Java</option>
-            <option value="Node">Node.js</option>
-            <option value="SQL">SQL</option>
-            
-          </select>
-        </div>
-
         {/* filtro seniority */}
         <div>
           <label className={labelClass}>Nivel / Seniority</label>
@@ -41,7 +19,7 @@ const CursosFiltros = ({ filtrosSeleccionados, onFiltroChange }) => {
             onChange={onFiltroChange}
             className={selectClass}
           >
-            <option value="todos">Todos</option>
+            <option value="">Todos</option>
             <option value="Trainee">Principiante (Trainee)</option>
             <option value="Junior">Junior</option>
             <option value="Semi Senior">Intermedio (Semi Senior)</option>
@@ -58,10 +36,10 @@ const CursosFiltros = ({ filtrosSeleccionados, onFiltroChange }) => {
             onChange={onFiltroChange}
             className={selectClass}
           >
-            <option value="todos">Todas</option>
+            <option value="">Todas</option>
             <option value="Sincrónico">Sincrónico (En vivo)</option>
             <option value="Asincrónico">Asincrónico (Grabado)</option>
-            <option value="Hibrido">Híbrido</option>
+            <option value="Híbrido">Híbrido</option>
           </select>
         </div>
 
